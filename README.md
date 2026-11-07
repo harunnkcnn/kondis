@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://github.com/harunnkcnn/kondis/actions/workflows/ci.yml"><img src="https://github.com/harunnkcnn/kondis/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/license-AGPL--3.0-2f7bff" alt="AGPL-3.0">
-  <img src="https://img.shields.io/badge/Django-6.1-0f1726" alt="Django 6.1">
+  <img src="https://img.shields.io/badge/Python-3.11%2B-0f1726" alt="Python 3.11+"> <img src="https://img.shields.io/badge/Django-5.2%20LTS%20%7C%206.x-0f1726" alt="Django 5.2 LTS | 6.x">
   <img src="https://img.shields.io/badge/dil-TR%20%7C%20EN-0f1726" alt="TR | EN">
 </p>
 
@@ -87,14 +87,34 @@ docker compose exec web python manage.py createsuperuser
 
 ### Docker'sız (geliştirme)
 
-```bash
-python -m venv .venv && source .venv/bin/activate
+Python 3.11 ya da daha yenisi gerekir.
+
+**Windows (PowerShell):**
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 pip install -r requirements-dev.txt
-export KONDIS_DEBUG=1
+$env:KONDIS_DEBUG="1"
 python manage.py migrate
 python manage.py seed_demo          # isteğe bağlı: örnek antrenör ve 5 öğrenci
 python manage.py runserver
 ```
+
+PowerShell betik çalıştırmayı engellerse önce `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` komutunu çalıştır.
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements-dev.txt
+export KONDIS_DEBUG=1
+python manage.py migrate
+python manage.py seed_demo
+python manage.py runserver
+```
+
+Yeni bir terminal açtığında `KONDIS_DEBUG` ayarını tekrar yapman gerekir. PostgreSQL kullanacaksan `requirements-postgres.txt` dosyasını kur.
 
 Demo girişi: `demo` / `kondis-demo-2026`
 
@@ -128,7 +148,7 @@ templates/       Django şablonları + htmx
 locale/tr/       Türkçe çeviriler
 ```
 
-- **Django 6.1 + htmx**: ayrı bir frontend build adımı yok, JavaScript bağımlılığı tek dosya.
+- **Django (5.2 LTS ya da 6.x) + htmx**: ayrı bir frontend build adımı yok, JavaScript bağımlılığı tek dosya.
 - **SQLite varsayılan**, PostgreSQL destekli. Tek antrenör ya da küçük bir salon için SQLite fazlasıyla yeterli.
 - Arayüz tamamen el yazımı CSS; koyu tema, telefon öncelikli, klavyeyle gezilebilir.
 

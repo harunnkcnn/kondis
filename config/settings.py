@@ -25,7 +25,10 @@ if not SECRET_KEY:
     if DEBUG:
         SECRET_KEY = "dev-only-insecure-key-change-me"
     else:
-        raise ImproperlyConfigured("Set KONDIS_SECRET_KEY (see .env.example).")
+        raise ImproperlyConfigured(
+            "Set KONDIS_SECRET_KEY for production, or KONDIS_DEBUG=1 for local development. "
+            'PowerShell: $env:KONDIS_DEBUG="1"   cmd: set KONDIS_DEBUG=1   macOS/Linux: export KONDIS_DEBUG=1'
+        )
 
 ALLOWED_HOSTS = env_list("KONDIS_ALLOWED_HOSTS", "localhost,127.0.0.1")
 CSRF_TRUSTED_ORIGINS = env_list("KONDIS_CSRF_TRUSTED_ORIGINS")

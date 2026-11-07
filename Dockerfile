@@ -7,8 +7,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 RUN useradd --create-home --uid 1000 kondis
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements.txt requirements-postgres.txt ./
+RUN pip install -r requirements-postgres.txt
 
 COPY --chown=kondis:kondis . .
 RUN KONDIS_SECRET_KEY=build-only python manage.py collectstatic --noinput \

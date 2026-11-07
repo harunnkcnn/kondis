@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://github.com/harunnkcnn/kondis/actions/workflows/ci.yml"><img src="https://github.com/harunnkcnn/kondis/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/license-AGPL--3.0-2f7bff" alt="AGPL-3.0">
-  <img src="https://img.shields.io/badge/Django-6.1-0f1726" alt="Django 6.1">
+  <img src="https://img.shields.io/badge/Python-3.11%2B-0f1726" alt="Python 3.11+"> <img src="https://img.shields.io/badge/Django-5.2%20LTS%20%7C%206.x-0f1726" alt="Django 5.2 LTS | 6.x">
   <img src="https://img.shields.io/badge/lang-TR%20%7C%20EN-0f1726" alt="TR | EN">
 </p>
 
@@ -79,16 +79,19 @@ docker compose up -d --build
 docker compose exec web python manage.py createsuperuser
 ```
 
-Without Docker:
+Without Docker (Python 3.11 or newer). On Windows PowerShell:
 
-```bash
-python -m venv .venv && source .venv/bin/activate
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 pip install -r requirements-dev.txt
-export KONDIS_DEBUG=1
+$env:KONDIS_DEBUG="1"
 python manage.py migrate
-python manage.py seed_demo          # optional: a demo coach with five clients
+python manage.py seed_demo
 python manage.py runserver
 ```
+
+On macOS / Linux use `source .venv/bin/activate` and `export KONDIS_DEBUG=1` instead.
 
 Demo login: `demo` / `kondis-demo-2026`
 
@@ -96,7 +99,7 @@ Configuration is environment-only; see [`.env.example`](.env.example) and the ta
 
 ## Stack
 
-Django 6.1, htmx, hand-written CSS, SQLite or PostgreSQL, Gunicorn + WhiteNoise in a single container. Training logic (1RM, records, dashboard, templates) lives in `coaching/services.py`, independent of HTTP, and is covered by tests that run in CI.
+Django (5.2 LTS or 6.x), htmx, hand-written CSS, SQLite or PostgreSQL, Gunicorn + WhiteNoise in a single container. Training logic (1RM, records, dashboard, templates) lives in `coaching/services.py`, independent of HTTP, and is covered by tests that run in CI.
 
 ## Security
 
