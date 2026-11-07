@@ -126,7 +126,7 @@ Bir açık bulursan lütfen herkese açık issue yerine [SECURITY.md](SECURITY.m
 
 **Community** (bu repo, AGPL-3.0): tek antrenör, sınırsız öğrenci, yukarıdaki tüm özellikler.
 
-**Pro** (lisanslı, ayrı paket): birden fazla antrenör ve salon sahibi görünümü, ödeme ve borç takibi, WhatsApp hatırlatmaları, programı logolu PDF olarak paylaşma, ölçü ve fotoğraf takibi. Kurulum aynı; Pro paketi lisans anahtarıyla eklenir. Bilgi için GitHub üzerinden iletişime geç.
+**Pro** (geliştiriliyor, lisanslı ayrı paket): birden fazla antrenör ve salon sahibi görünümü, ödeme ve borç takibi, WhatsApp hatırlatmaları, programı logolu PDF olarak paylaşma, ölçü ve fotoğraf takibi. Kurulum aynı kalacak; Pro paketi lisans anahtarıyla eklenecek. Haber almak için repoyu takip edebilirsin.
 
 ## Katkı
 

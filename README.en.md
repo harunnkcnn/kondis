@@ -89,7 +89,7 @@ Client links carry a 192-bit random token and can be rotated. Portal pages are `
 
 **Community** (this repository, AGPL-3.0): one coach, unlimited clients, everything above.
 
-**Pro** (licensed add-on): several coaches with an owner view, payments and balances, WhatsApp reminders, branded PDF programs, measurements and progress photos.
+**Pro** (in development, licensed add-on): several coaches with an owner view, payments and balances, WhatsApp reminders, branded PDF programs, measurements and progress photos.
 
 ## License
 
