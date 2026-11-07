@@ -20,7 +20,7 @@
 
 ---
 
-![Antrenör paneli: bugün kim çalıştı, kimin paketi bitiyor](docs/screenshots/dashboard.png)
+![Kondis: antrenör paneli ve öğrencinin telefondaki antrenman ekranı](docs/social-preview.png)
 
 ## Neden Kondis?
 

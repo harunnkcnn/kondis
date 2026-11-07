@@ -20,7 +20,7 @@
 
 ---
 
-![Coach dashboard: who trained today, whose package is ending](docs/screenshots/dashboard.png)
+![Kondis: the coach panel and the client's workout screen on a phone](docs/social-preview.png)
 
 ## Why
 
