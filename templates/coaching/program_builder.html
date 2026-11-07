@@ -3,10 +3,16 @@
 {% block content %}
 <div class="page-head">
   <div><h1>{{ program }}</h1><p><a href="{{ program.client.get_absolute_url }}">{{ program.client }}</a>{% if program.notes %} · {{ program.notes }}{% endif %}</p></div>
-  <a class="btn" href="{{ program.client.get_absolute_url }}">{% translate "Done" %}</a>
+  <div class="btn-row">
+    {% if program.generator %}
+    <form method="post" action="{% url 'coaching:program_regenerate' program.pk %}" class="inline">{% csrf_token %}
+      <button class="btn" type="submit">{% translate "Generate another version" %}</button></form>
+    {% endif %}
+    <a class="btn btn-primary" href="{{ program.client.get_absolute_url }}">{% translate "Done" %}</a>
+  </div>
 </div>
 
-<div class="grid">
+<div class="grid grid-wide">
   {% for day in days %}
   <section class="day" aria-labelledby="day-{{ day.pk }}">
     <header>

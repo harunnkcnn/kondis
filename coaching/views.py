@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
-from . import services
+from . import generator, services
 from .forms import ClientForm, ExerciseForm, MembershipForm, ProgramDayForm, ProgramForm, ProgramItemForm
 from .models import Client, Exercise, Membership, Program, ProgramDay, ProgramItem, Workout
 
@@ -155,25 +155,44 @@ def membership_use_session(request: HttpRequest, pk: int) -> HttpResponse:
 @login_required
 def program_create(request: HttpRequest, pk: int) -> HttpResponse:
     client = _client(request, pk)
-    form = ProgramForm(request.POST or None)
+    form = ProgramForm(request.POST or None, client=client)
     if request.method == "POST" and form.is_valid():
-        template = form.cleaned_data.get("template")
-        if template:
-            program = services.create_program_from_template(client, template)
-            if form.cleaned_data.get("title"):
-                program.title = form.cleaned_data["title"]
-            program.notes = form.cleaned_data.get("notes", "")
+        data = form.cleaned_data
+        if data["mode"] == ProgramForm.AUTO:
+            for name in ("goal", "level", "equipment", "days_per_week", "session_minutes"):
+                setattr(client, name, data[name])
+            client.limitations = ",".join(data["limitations"])
+            client.save(update_fields=["goal", "level", "equipment", "days_per_week", "session_minutes", "limitations"])
+            program = generator.generate_program(client, generator.Plan.for_client(client), title=data["title"])
+            if data["notes"]:
+                program.notes = f"{data['notes']}\n\n{program.notes}"
+                program.save(update_fields=["notes"])
+            messages.success(request, _("Program generated. Change anything you like, or ask for another version."))
+        elif data["mode"] == ProgramForm.TEMPLATE:
+            program = services.create_program_from_template(client, data["template"] or "full_body")
+            program.title = data["title"] or program.title
+            program.notes = data["notes"]
             program.save()
         else:
-            program = form.save(commit=False)
-            program.client = client
-            program.save()
+            program = Program.objects.create(client=client, title=data["title"], notes=data["notes"])
         return redirect(program)
     return render(
         request,
-        "coaching/form.html",
-        {"form": form, "title": _("New program for %(name)s") % {"name": client}, "back": client.get_absolute_url(), "nav": "clients"},
+        "coaching/program_create.html",
+        {"form": form, "client": client, "nav": "clients"},
     )
+
+
+@login_required
+@require_POST
+def program_regenerate(request: HttpRequest, pk: int) -> HttpResponse:
+    program = _program(request, pk)
+    if not program.generator:
+        messages.error(request, _("Only generated programs can have another version."))
+        return redirect(program)
+    fresh = generator.generate_another_version(program)
+    messages.success(request, _("New version ready. The previous one is kept in the client's history."))
+    return redirect(fresh)
 
 
 @login_required

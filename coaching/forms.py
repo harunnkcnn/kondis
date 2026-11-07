@@ -4,15 +4,53 @@ from django import forms
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .models import Client, Exercise, Membership, Program, ProgramDay, ProgramItem, Workout
+from .models import Client, Exercise, Membership, ProgramDay, ProgramItem, Workout
 from .services import TEMPLATES
 
+DAYS_CHOICES = [(n, str(n)) for n in range(2, 7)]
+MINUTES_CHOICES = [(m, f"{m}") for m in (30, 45, 60, 75, 90)]
 
-class ClientForm(forms.ModelForm):
+
+class TrainingProfileMixin(forms.Form):
+    """Shared fields for a client's training profile, used by the program generator."""
+
+    days_per_week = forms.TypedChoiceField(label=_("Training days per week"), choices=DAYS_CHOICES, coerce=int, initial=3)
+    session_minutes = forms.TypedChoiceField(label=_("Session length (min)"), choices=MINUTES_CHOICES, coerce=int, initial=60)
+    limitations = forms.MultipleChoiceField(
+        label=_("Areas to protect"),
+        choices=Client.Limitation.choices,
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        help_text=_("Exercises that load these joints are left out of generated programs."),
+    )
+
+
+class ClientForm(TrainingProfileMixin, forms.ModelForm):
     class Meta:
         model = Client
-        fields = ["full_name", "phone", "email", "goal", "target_weight", "notes", "is_active"]
+        fields = [
+            "full_name",
+            "phone",
+            "email",
+            "goal",
+            "level",
+            "days_per_week",
+            "session_minutes",
+            "equipment",
+            "limitations",
+            "target_weight",
+            "notes",
+            "is_active",
+        ]
         widgets = {"notes": forms.Textarea(attrs={"rows": 3})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            self.initial["limitations"] = self.instance.limitation_list
+
+    def clean_limitations(self):
+        return ",".join(self.cleaned_data["limitations"])
 
 
 class MembershipForm(forms.ModelForm):
@@ -39,26 +77,38 @@ class MembershipForm(forms.ModelForm):
         return data
 
 
-class ProgramForm(forms.ModelForm):
-    template = forms.ChoiceField(
-        label=_("Start from"),
-        required=False,
-        choices=[("", _("An empty program"))] + [(key, spec["title"]) for key, spec in TEMPLATES.items()],
+class ProgramForm(TrainingProfileMixin, forms.Form):
+    AUTO, TEMPLATE, EMPTY = "auto", "template", "empty"
+
+    mode = forms.ChoiceField(
+        label=_("How do you want to start?"),
+        choices=[
+            (AUTO, _("Generate a program for this client")),
+            (TEMPLATE, _("Start from a ready-made template")),
+            (EMPTY, _("Start empty and write it myself")),
+        ],
+        initial=AUTO,
+        widget=forms.RadioSelect,
     )
+    goal = forms.ChoiceField(label=_("Goal"), choices=Client.Goal.choices)
+    level = forms.ChoiceField(label=_("Training level"), choices=Client.Level.choices)
+    equipment = forms.ChoiceField(label=_("Equipment"), choices=Client.Equipment.choices)
+    template = forms.ChoiceField(label=_("Template"), required=False, choices=[(key, spec["title"]) for key, spec in TEMPLATES.items()])
+    title = forms.CharField(
+        label=_("Title"), max_length=100, required=False, help_text=_("Optional. A title is suggested if you leave it empty.")
+    )
+    notes = forms.CharField(label=_("Notes for the client"), required=False, widget=forms.Textarea(attrs={"rows": 2}))
 
-    class Meta:
-        model = Program
-        fields = ["title", "notes"]
-        widgets = {"notes": forms.Textarea(attrs={"rows": 2})}
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, client: Client, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["title"].required = False
+        for name in ("goal", "level", "equipment", "days_per_week", "session_minutes"):
+            self.initial.setdefault(name, getattr(client, name))
+        self.initial.setdefault("limitations", client.limitation_list)
 
     def clean(self):
         data = super().clean()
-        if not data.get("title") and not data.get("template"):
-            self.add_error("title", _("Give the program a title or pick a starter."))
+        if data.get("mode") == self.EMPTY and not data.get("title"):
+            self.add_error("title", _("Give the empty program a title."))
         return data
 
 

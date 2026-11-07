@@ -24,7 +24,7 @@
 
 ## Demo
 
-**Watch:** [docs/kondis-demo.mp4](docs/kondis-demo.mp4) (90 s). A coach adds a client and writes a program, the client logs sets on a phone, the coach sees it on the dashboard.
+**Watch:** [docs/kondis-demo.mp4](docs/kondis-demo.mp4) (100 s). A coach adds a client and generates a program for them, the client logs sets on a phone, the coach sees it on the dashboard.
 
 **Try it:** the button below starts your own demo on Render's free plan with sample data. The login page offers "Try as a coach" and "Try as a client".
 
@@ -36,6 +36,7 @@ The free plan's temporary disk means every restart brings back clean sample data
 
 Most personal trainers still run their clients on WhatsApp photos, spreadsheets and memory: when does this package end, did she train this week, what did he squat last Monday? Self-hosted trackers like [openGym](https://github.com/DuarteSantos8/openGym) and [wger](https://github.com/wger-project/wger) are great for the lifter. Kondis is built for the person writing the program.
 
+- **A program of their own for every client.** Built from goal, level, days per week, session length, equipment (gym, dumbbells, home) and the joints to protect (knee, shoulder, lower back). Two clients with the same profile still get different plans, and another version is one click away.
 - **No app for the client.** Each client gets a private link you can rotate at any time. Send it on WhatsApp; they open it, train, log.
 - **Packages and sessions.** "12 PT sessions", "3 months": what's ended, what's ending and what has no sessions left sits on the home screen.
 - **Who went quiet?** Clients without a workout in a week, one tap away from a WhatsApp message.
@@ -46,9 +47,11 @@ Most personal trainers still run their clients on WhatsApp photos, spreadsheets 
 **Coach**
 - Today screen: trained today, packages to renew, quiet for a week
 - Client page: goal, notes, body-weight trend, recent workouts, best lifts (estimated 1RM, Epley)
+- **Program generator**: picks a split from the schedule (full body for 2 days, upper/lower for 4, push/pull/legs for 6...), fills each slot by movement pattern, sets sets, reps and rest from the goal, and adds a progression note. Rule-based; no external service or API key.
+- Exercises that load a protected joint are never picked; the next safe slot takes their place
 - Program builder with days pinned to weekdays or a simple rotation (A, B, C, A...)
-- Starter programs (Full Body 3x, Upper/Lower, Push/Pull/Legs) that load as normal, editable programs
-- A 55-exercise library named in Turkish and English, plus your own
+- Starter templates are still there: Full Body 3x, Upper/Lower, Push/Pull/Legs
+- A 96-exercise library tagged by movement pattern and joint load, named in Turkish and English, plus your own
 - Packages with dates, session count (or unlimited) and price; count a session with one tap
 
 <img src="docs/client-flow.gif" width="260" align="right" alt="A client logging a workout on a phone">

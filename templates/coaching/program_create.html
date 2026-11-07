@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "New program" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>{% blocktranslate with name=client.full_name %}New program for {{ name }}{% endblocktranslate %}</h1>
+    <p>{% translate "Generated programs are built from the client's goal, level, schedule, equipment and the joints to protect, so no two clients get the same plan." %}</p></div>
+  <a class="btn btn-quiet" href="{{ client.get_absolute_url }}">{% translate "Cancel" %}</a>
+</div>
+<section class="panel">
+  <form method="post" class="form" novalidate id="program-form">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <fieldset class="modes">
+      <legend>{{ form.mode.label }}</legend>
+      {% for radio in form.mode %}<label class="mode">{{ radio.tag }}<span>{{ radio.choice_label }}</span></label>{% endfor %}
+    </fieldset>
+
+    <div data-mode="auto" class="mode-section">
+      <div class="field-row">
+        <div class="field">{{ form.goal.label_tag }}{{ form.goal }}</div>
+        <div class="field">{{ form.level.label_tag }}{{ form.level }}</div>
+      </div>
+      <div class="field-row">
+        <div class="field">{{ form.days_per_week.label_tag }}{{ form.days_per_week }}</div>
+        <div class="field">{{ form.session_minutes.label_tag }}{{ form.session_minutes }}</div>
+      </div>
+      <div class="field">{{ form.equipment.label_tag }}{{ form.equipment }}</div>
+      <fieldset class="field checks">
+        <legend>{{ form.limitations.label }}</legend>
+        {% for box in form.limitations %}<label class="check">{{ box.tag }}<span>{{ box.choice_label }}</span></label>{% endfor %}
+        <div class="help">{{ form.limitations.help_text }}</div>
+      </fieldset>
+      <p class="muted small" style="margin:0">{% translate "These answers are saved to the client's profile." %}</p>
+    </div>
+
+    <div data-mode="template" class="mode-section">
+      <div class="field">{{ form.template.label_tag }}{{ form.template }}</div>
+    </div>
+
+    <div class="field">{{ form.title.label_tag }}{{ form.title }}<div class="help">{{ form.title.help_text }}</div>{{ form.title.errors }}</div>
+    <div class="field">{{ form.notes.label_tag }}{{ form.notes }}</div>
+    <div class="btn-row"><button class="btn btn-primary" type="submit">{% translate "Create program" %}</button></div>
+  </form>
+</section>
+<script>
+  (() => {
+    const form = document.getElementById('program-form');
+    const sync = () => {
+      const mode = form.querySelector('input[name="mode"]:checked')?.value;
+      form.querySelectorAll('.mode-section').forEach((s) => { s.hidden = s.dataset.mode !== mode; });
+    };
+    form.addEventListener('change', (e) => { if (e.target.name === 'mode') sync(); });
+    sync();
+  })();
+</script>
+{% endblock %}

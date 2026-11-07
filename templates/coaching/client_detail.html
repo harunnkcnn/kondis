@@ -78,6 +78,9 @@
       <dl class="kv">
         {% if client.phone %}<dt>{% translate "Phone" %}</dt><dd><a href="tel:{{ client.phone }}">{{ client.phone }}</a></dd>{% endif %}
         {% if client.email %}<dt>{% translate "Email" %}</dt><dd>{{ client.email }}</dd>{% endif %}
+        <dt>{% translate "Level" %}</dt><dd>{{ client.get_level_display }}</dd>
+        <dt>{% translate "Schedule" %}</dt><dd>{% blocktranslate with d=client.days_per_week m=client.session_minutes %}{{ d }} days, {{ m }} min{% endblocktranslate %}</dd>
+        <dt>{% translate "Equipment" %}</dt><dd>{{ client.get_equipment_display }}</dd>
         <dt>{% translate "Since" %}</dt><dd>{{ client.created_at|date:"j M Y" }}</dd>
         {% if program %}<dt>{% translate "Program" %}</dt><dd><a href="{{ program.get_absolute_url }}">{{ program }}</a></dd>{% endif %}
       </dl>

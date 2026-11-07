@@ -24,7 +24,7 @@
 
 ## Demo
 
-**Videoyu izle:** [docs/kondis-demo.mp4](docs/kondis-demo.mp4) (1,5 dk). Antrenör öğrenci ekleyip program yazıyor, öğrenci telefondan setlerini giriyor, antrenör sonucu panelde görüyor.
+**Videoyu izle:** [docs/kondis-demo.mp4](docs/kondis-demo.mp4) (1,5 dk). Antrenör öğrenci ekleyip ona özel programı otomatik oluşturuyor, öğrenci telefondan setlerini giriyor, antrenör sonucu panelde görüyor.
 
 **Kendin dene:** aşağıdaki butonla Render'ın ücretsiz planında örnek verili kendi demonu birkaç dakikada açabilirsin. Giriş ekranında "Antrenör olarak dene" ve "Öğrenci olarak dene" butonları çıkar.
 
@@ -38,6 +38,7 @@ Türkiye'de PT'lerin çoğu öğrenci programını hâlâ WhatsApp'tan fotoğraf
 
 Kondis bunu tek bir panelde topluyor:
 
+- **Her öğrenciye kendine özel program.** Hedef, seviye, haftalık gün sayısı, antrenman süresi, ekipman (salon, dumbbell, ev) ve korunacak eklemlere (diz, omuz, bel) göre program otomatik yazılır. Aynı profildeki iki öğrenciye bile farklı plan çıkar; beğenmezsen tek tıkla farklı versiyon.
 - **Öğrenciye uygulama indirtmezsin.** Her öğrencinin kendine özel, istediğin an yenileyebileceğin bir linki var. WhatsApp'tan gönderirsin, telefonda açar, setini girer.
 - **Paket ve seans takibi.** "12 PT seansı", "3 aylık üyelik" gibi paketler; biten, bitmek üzere olan ve seansı kalmayanlar ana ekranda.
 - **Kim ortadan kayboldu?** Bir haftadır antrenman girmeyen öğrenciler tek tıkla WhatsApp'la listede.
@@ -48,9 +49,11 @@ Kondis bunu tek bir panelde topluyor:
 **Antrenör tarafı**
 - Bugün ekranı: bugün antrenman yapanlar, yenilenecek paketler, bir haftadır sessiz olanlar
 - Öğrenci kartı: hedef, notlar (sakatlık vb.), kilo grafiği, son antrenmanlar, en iyi kaldırışlar (tahmini 1RM, Epley)
+- **Otomatik program oluşturucu**: gün sayısına göre split seçer (2 gün tüm vücut, 4 gün üst/alt, 6 gün itiş/çekiş/bacak...), her slotu hareket kalıbına göre doldurur (squat, hinge, itiş, çekiş, izolasyon, core), set/tekrar/dinlenmeyi hedefe göre ayarlar ve ilerleme notu ekler. Kural tabanlı; dış servis ya da API anahtarı gerekmez.
+- Korunan eklemi yükleyen egzersizler hiç seçilmez, boşalan slotu sıradaki güvenli hareket doldurur
 - Program yazma: günlere bölünmüş program, haftanın gününe sabitleme ya da sıralı rotasyon (A, B, C, A...)
-- Hazır şablonlar: Full Body 3x, Upper/Lower, Push/Pull/Legs; yüklenir, sonra istediğin gibi düzenlenir
-- Türkçe ve İngilizce isimli 55 egzersizlik kütüphane + kendi egzersizlerin
+- Hazır şablonlar da duruyor: Full Body 3x, Upper/Lower, Push/Pull/Legs
+- Hareket kalıbı ve eklem yüküyle etiketli, Türkçe ve İngilizce isimli 96 egzersizlik kütüphane + kendi egzersizlerin
 - Paketler: tarih aralığı, seans sayısı (ya da sınırsız), ücret; "Seans düş" ile tek tıkla seans kullanımı
 
 <img src="docs/client-flow.gif" width="260" align="right" alt="Öğrencinin telefondan antrenman girişi">
@@ -116,6 +119,8 @@ Demo girişi: `demo` / `kondis-demo-2026`
 ```
 coaching/
   models.py      Öğrenci, Paket, Egzersiz, Program > Gün > Hareket, Antrenman > Set
+  generator.py   Kural tabanlı program oluşturucu (split, slot, doz, öğrenciye özel tohum)
+  library.py     Hareket kalıbı ve eklem yüküyle etiketli egzersiz kütüphanesi
   services.py    HTTP'den bağımsız iş mantığı: 1RM, rekorlar, ana ekran, şablonlar
   views.py       Antrenör paneli (her sorgu giriş yapan antrenöre göre filtrelenir)
   portal.py      Öğrenci ekranı (link anahtarıyla erişim)

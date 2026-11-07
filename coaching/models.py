@@ -25,6 +25,21 @@ class Client(models.Model):
         MOBILITY = "mobility", _("Mobility and rehab")
         GENERAL = "general", _("General fitness")
 
+    class Level(models.TextChoices):
+        BEGINNER = "beginner", _("Beginner")
+        INTERMEDIATE = "intermediate", _("Intermediate")
+        ADVANCED = "advanced", _("Advanced")
+
+    class Equipment(models.TextChoices):
+        GYM = "gym", _("Full gym")
+        DUMBBELLS = "dumbbells", _("Dumbbells and bands")
+        HOME = "home", _("Bodyweight only")
+
+    class Limitation(models.TextChoices):
+        KNEE = "knee", _("Knee")
+        SHOULDER = "shoulder", _("Shoulder")
+        LOWER_BACK = "lower_back", _("Lower back")
+
     trainer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="clients")
     full_name = models.CharField(_("full name"), max_length=120)
     phone = models.CharField(_("phone"), max_length=32, blank=True)
@@ -32,6 +47,11 @@ class Client(models.Model):
     goal = models.CharField(_("goal"), max_length=16, choices=Goal.choices, default=Goal.GENERAL)
     target_weight = models.DecimalField(_("target body weight (kg)"), max_digits=5, decimal_places=1, null=True, blank=True)
     notes = models.TextField(_("notes"), blank=True, help_text=_("Injuries, preferences, anything worth remembering."))
+    level = models.CharField(_("training level"), max_length=16, choices=Level.choices, default=Level.BEGINNER)
+    days_per_week = models.PositiveSmallIntegerField(_("training days per week"), default=3)
+    session_minutes = models.PositiveSmallIntegerField(_("session length (min)"), default=60)
+    equipment = models.CharField(_("equipment"), max_length=16, choices=Equipment.choices, default=Equipment.GYM)
+    limitations = models.CharField(_("areas to protect"), max_length=64, blank=True)
     access_token = models.CharField(max_length=64, unique=True, default=new_access_token, editable=False)
     is_active = models.BooleanField(_("active"), default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -51,6 +71,10 @@ class Client(models.Model):
     def rotate_token(self) -> None:
         self.access_token = new_access_token()
         self.save(update_fields=["access_token"])
+
+    @property
+    def limitation_list(self) -> list[str]:
+        return [v for v in self.limitations.split(",") if v]
 
     @property
     def initials(self) -> str:
@@ -164,6 +188,10 @@ class Exercise(models.Model):
     muscle = models.CharField(_("muscle group"), max_length=16, choices=Muscle.choices)
     equipment = models.CharField(_("equipment"), max_length=16, choices=Equipment.choices)
     cue = models.CharField(_("coaching cue"), max_length=200, blank=True)
+    # Movement pattern the program generator fills slots with; empty = never auto-picked.
+    pattern = models.CharField(max_length=16, blank=True, db_index=True)
+    # Comma-separated joints this exercise loads: knee, shoulder, lower_back.
+    stresses = models.CharField(max_length=48, blank=True)
 
     class Meta:
         ordering = ["muscle", "name_en"]
@@ -190,6 +218,9 @@ class Program(models.Model):
     title = models.CharField(_("title"), max_length=100)
     notes = models.TextField(_("notes for the client"), blank=True)
     is_active = models.BooleanField(_("active"), default=True)
+    # Inputs used by the program generator, so a different version can be made later.
+    generator = models.JSONField(null=True, blank=True, editable=False)
+    variant = models.PositiveSmallIntegerField(default=0, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

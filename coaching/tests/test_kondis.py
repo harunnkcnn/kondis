@@ -162,7 +162,18 @@ class TrainerAccessTests(Base):
 
     def test_create_client_assigns_owner(self):
         self.client.force_login(self.coach)
-        response = self.client.post(reverse("coaching:client_create"), {"full_name": "Mert Kaya", "goal": "strength", "is_active": "on"})
+        response = self.client.post(
+            reverse("coaching:client_create"),
+            {
+                "full_name": "Mert Kaya",
+                "goal": "strength",
+                "level": "beginner",
+                "days_per_week": "3",
+                "session_minutes": "60",
+                "equipment": "gym",
+                "is_active": "on",
+            },
+        )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Client.objects.get(full_name="Mert Kaya").trainer, self.coach)
 

@@ -61,6 +61,9 @@ msgstr "Öğrenci olarak dene"
 msgid "Coach login"
 msgstr "Antrenör girişi"
 
+msgid "Generate another version"
+msgstr "Farklı bir versiyon oluştur"
+
 msgid "Done"
 msgstr "Tamam"
 
@@ -202,6 +205,15 @@ msgstr "Telefon"
 msgid "Email"
 msgstr "E-posta"
 
+msgid "Level"
+msgstr "Seviye"
+
+msgid "Schedule"
+msgstr "Sıklık"
+
+msgid "Equipment"
+msgstr "Ekipman"
+
 msgid "Since"
 msgstr "Başlangıç"
 
@@ -210,6 +222,9 @@ msgstr "Program"
 
 msgid "Target %(t)s kg"
 msgstr "Hedef %(t)s kg"
+
+msgid "%(d)s days, %(m)s min"
+msgstr "Haftada %(d)s gün, %(m)s dk"
 
 msgid "Who trained, whose package is running out, and who has gone quiet."
 msgstr "Kim antrenman yaptı, kimin paketi bitiyor, kim ortadan kayboldu."
@@ -270,6 +285,21 @@ msgstr "Öğrencinin notu"
 
 msgid "No sets logged in this workout."
 msgstr "Bu antrenmanda set girilmedi."
+
+msgid "New program"
+msgstr "Yeni program"
+
+msgid "Generated programs are built from the client's goal, level, schedule, equipment and the joints to protect, so no two clients get the same plan."
+msgstr "Otomatik program öğrencinin hedefine, seviyesine, haftalık gün sayısına, ekipmanına ve korunması gereken eklemlere göre oluşturulur; iki öğrenciye aynı plan çıkmaz."
+
+msgid "These answers are saved to the client's profile."
+msgstr "Bu cevaplar öğrencinin profiline kaydedilir."
+
+msgid "Create program"
+msgstr "Programı oluştur"
+
+msgid "New program for %(name)s"
+msgstr "%(name)s için yeni program"
 
 msgid "Search by name or phone"
 msgstr "İsim ya da telefonla ara"
@@ -385,6 +415,63 @@ msgstr "Antrenörüne not"
 msgid "Finish workout"
 msgstr "Antrenmanı bitir"
 
+msgid "Full body A"
+msgstr "Tüm vücut A"
+
+msgid "Full body B"
+msgstr "Tüm vücut B"
+
+msgid "Full body C"
+msgstr "Tüm vücut C"
+
+msgid "Upper body A"
+msgstr "Üst vücut A"
+
+msgid "Upper body B"
+msgstr "Üst vücut B"
+
+msgid "Lower body A"
+msgstr "Alt vücut A"
+
+msgid "Lower body B"
+msgstr "Alt vücut B"
+
+msgid "Push"
+msgstr "İtiş"
+
+msgid "Pull"
+msgstr "Çekiş"
+
+msgid "Legs"
+msgstr "Bacak"
+
+msgid "%(n)s days a week"
+msgstr "Haftada %(n)s gün"
+
+msgid "%(n)s min sessions"
+msgstr "%(n)s dakikalık antrenman"
+
+msgid "protecting: %(areas)s"
+msgstr "Korunan bölge: %(areas)s"
+
+msgid "When every set reaches the top of the rep range, add 2.5 kg to the main lifts."
+msgstr "Tüm setlerde tekrar aralığının üst sınırına ulaşınca ana hareketlere 2,5 kg ekle."
+
+msgid "When you hit the top of the rep range on all sets, go up one weight step next time."
+msgstr "Tüm setlerde üst tekrar sınırına ulaştığında bir sonraki antrenmanda ağırlığı bir kademe artır."
+
+msgid "Keep rests short. Once a session feels easy, add one round to the finisher."
+msgstr "Dinlenmeleri kısa tut. Antrenman kolay gelmeye başlayınca bitiriciye bir tur ekle."
+
+msgid "Move slowly and without pain. Add load only when the full range feels easy."
+msgstr "Yavaş ve ağrısız hareket et. Tam hareket açıklığı kolay gelince yük ekle."
+
+msgid "Leave one or two reps in reserve. Add weight when the last set feels easy."
+msgstr "Her sette bir iki tekrar yedekte bırak. Son set kolay gelince ağırlık ekle."
+
+msgid "%(goal)s, %(n)s days"
+msgstr "%(goal)s, %(n)s gün"
+
 msgid "Strength"
 msgstr "Güç"
 
@@ -399,6 +486,33 @@ msgstr "Mobilite ve rehabilitasyon"
 
 msgid "General fitness"
 msgstr "Genel kondisyon"
+
+msgid "Beginner"
+msgstr "Başlangıç"
+
+msgid "Intermediate"
+msgstr "Orta"
+
+msgid "Advanced"
+msgstr "İleri"
+
+msgid "Full gym"
+msgstr "Tam donanımlı salon"
+
+msgid "Dumbbells and bands"
+msgstr "Dumbbell ve bant"
+
+msgid "Bodyweight only"
+msgstr "Sadece vücut ağırlığı"
+
+msgid "Knee"
+msgstr "Diz"
+
+msgid "Shoulder"
+msgstr "Omuz"
+
+msgid "Lower back"
+msgstr "Bel"
 
 msgid "full name"
 msgstr "ad soyad"
@@ -420,6 +534,21 @@ msgstr "notlar"
 
 msgid "Injuries, preferences, anything worth remembering."
 msgstr "Sakatlıklar, tercihler, akılda tutulması gereken her şey."
+
+msgid "training level"
+msgstr "seviye"
+
+msgid "training days per week"
+msgstr "haftalık antrenman günü"
+
+msgid "session length (min)"
+msgstr "antrenman süresi (dk)"
+
+msgid "equipment"
+msgstr "ekipman"
+
+msgid "areas to protect"
+msgstr "korunacak bölgeler"
 
 msgid "active"
 msgstr "aktif"
@@ -475,9 +604,6 @@ msgstr "Omuz"
 msgid "Arms"
 msgstr "Kol"
 
-msgid "Legs"
-msgstr "Bacak"
-
 msgid "Glutes"
 msgstr "Kalça"
 
@@ -522,9 +648,6 @@ msgstr "ad (İngilizce)"
 
 msgid "muscle group"
 msgstr "kas grubu"
-
-msgid "equipment"
-msgstr "ekipman"
 
 msgid "coaching cue"
 msgstr "ipucu"
@@ -586,17 +709,50 @@ msgstr "nasıl geçti?"
 msgid "Free session"
 msgstr "Serbest antrenman"
 
+msgid "Training days per week"
+msgstr "Haftalık antrenman günü"
+
+msgid "Session length (min)"
+msgstr "Antrenman süresi (dk)"
+
+msgid "Areas to protect"
+msgstr "Korunacak bölgeler"
+
+msgid "Exercises that load these joints are left out of generated programs."
+msgstr "Bu eklemleri yükleyen egzersizler otomatik programlara eklenmez."
+
 msgid "The end date can't be before the start date."
 msgstr "Bitiş tarihi başlangıçtan önce olamaz."
 
-msgid "Start from"
-msgstr "Şununla başla"
+msgid "How do you want to start?"
+msgstr "Nasıl başlamak istersin?"
 
-msgid "An empty program"
-msgstr "Boş bir program"
+msgid "Generate a program for this client"
+msgstr "Bu öğrenciye özel program oluştur"
 
-msgid "Give the program a title or pick a starter."
-msgstr "Programa bir başlık ver ya da hazır bir şablon seç."
+msgid "Start from a ready-made template"
+msgstr "Hazır bir şablonla başla"
+
+msgid "Start empty and write it myself"
+msgstr "Boş başla, kendim yazayım"
+
+msgid "Goal"
+msgstr "Hedef"
+
+msgid "Training level"
+msgstr "Seviye"
+
+msgid "Template"
+msgstr "Şablon"
+
+msgid "Optional. A title is suggested if you leave it empty."
+msgstr "İsteğe bağlı. Boş bırakırsan bir başlık önerilir."
+
+msgid "Notes for the client"
+msgstr "Öğrenciye notlar"
+
+msgid "Give the empty program a title."
+msgstr "Boş programa bir başlık ver."
 
 msgid "Energy, pain, anything your coach should know"
 msgstr "Enerji, ağrı, antrenörünün bilmesi gereken her şey"
@@ -622,8 +778,14 @@ msgstr "%(name)s için yeni paket"
 msgid "No sessions left on this package."
 msgstr "Bu pakette seans kalmadı."
 
-msgid "New program for %(name)s"
-msgstr "%(name)s için yeni program"
+msgid "Program generated. Change anything you like, or ask for another version."
+msgstr "Program oluşturuldu. İstediğini değiştirebilir ya da farklı bir versiyon isteyebilirsin."
+
+msgid "Only generated programs can have another version."
+msgstr "Sadece otomatik oluşturulan programların farklı versiyonu olabilir."
+
+msgid "New version ready. The previous one is kept in the client's history."
+msgstr "Yeni versiyon hazır. Öncekisi öğrencinin geçmişinde duruyor."
 
 msgid "Give the day a title."
 msgstr "Güne bir başlık ver."
