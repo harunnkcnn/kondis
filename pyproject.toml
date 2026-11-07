@@ -1,0 +1,8 @@
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I", "UP", "DJ"]
+ignore = ["E501"]  # long lines are left to the formatter

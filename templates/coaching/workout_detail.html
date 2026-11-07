@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% load i18n kondis %}
+{% block title %}{{ workout.title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>{{ workout.title }}</h1><p><a href="{{ workout.client.get_absolute_url }}">{{ workout.client }}</a> · {{ workout.performed_on|date:"l j F" }}{% if workout.body_weight %} · {{ workout.body_weight|kg }} kg{% endif %}</p></div>
+</div>
+{% if workout.note %}<section class="panel"><h2>{% translate "Client's note" %}</h2><p style="margin:0">“{{ workout.note }}”</p></section>{% endif %}
+<div class="grid" style="margin-top:var(--gap)">
+  {% for exercise, sets in grouped.items %}
+  <section class="exercise" style="margin:0">
+    <h2>{{ exercise.name }}</h2>
+    <ul class="sets" style="margin-top:.6rem">{% for s in sets %}
+      <li class="set"><span class="plate" data-load="{{ s.weight|plate }}">{{ s.set_number }}</span>
+        <span class="load num">{% if exercise.is_bodyweight %}{{ s.reps }} <small>{% translate "reps" %}</small>{% else %}{{ s.weight|kg }} <small>kg</small> × {{ s.reps }}{% endif %}</span></li>{% endfor %}
+    </ul>
+  </section>
+  {% empty %}<p class="empty">{% translate "No sets logged in this workout." %}</p>{% endfor %}
+</div>
+{% endblock %}

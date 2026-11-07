@@ -1,0 +1,14 @@
+{% load i18n %}<div class="package" id="package-{{ m.pk }}">
+  <div>
+    <h3>{{ m.package_name }}</h3>
+    <span class="sub muted small">{{ m.starts_on|date:"j M" }} – {{ m.ends_on|date:"j M Y" }}{% if m.price %} · {{ m.price|floatformat:"0g" }} ₺{% endif %}</span>
+    <div><span class="status status-{{ m.status }}">{{ m.status_label }}</span></div>
+  </div>
+  {% if m.sessions_total is not None %}
+  <div style="text-align:right">
+    <div class="sessions num">{{ m.sessions_used }}<span class="muted">/{{ m.sessions_total }}</span></div>
+    <button class="btn btn-quiet small" hx-post="{% url 'coaching:membership_use_session' m.pk %}" hx-target="#package-{{ m.pk }}" hx-swap="outerHTML"
+      {% if m.sessions_left == 0 %}disabled{% endif %}>{% translate "Count a session" %}</button>
+  </div>
+  {% endif %}
+</div>

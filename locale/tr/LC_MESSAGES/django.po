@@ -1,0 +1,648 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Kondis\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Language"
+msgstr "Dil"
+
+msgid "Change"
+msgstr "Değiştir"
+
+msgid "Main"
+msgstr "Ana menü"
+
+msgid "Today"
+msgstr "Bugün"
+
+msgid "Clients"
+msgstr "Öğrenciler"
+
+msgid "Exercises"
+msgstr "Egzersizler"
+
+msgid "Sign out"
+msgstr "Çıkış yap"
+
+msgid "Sign in"
+msgstr "Giriş yap"
+
+msgid "Coach panel. Clients use the link you send them."
+msgstr "Antrenör paneli. Öğrencilerin senin gönderdiğin linki kullanır."
+
+msgid "Username or password is wrong."
+msgstr "Kullanıcı adı ya da şifre hatalı."
+
+msgid "Username"
+msgstr "Kullanıcı adı"
+
+msgid "Password"
+msgstr "Şifre"
+
+msgid "Done"
+msgstr "Tamam"
+
+msgid "any day"
+msgstr "herhangi bir gün"
+
+msgid "Exercise"
+msgstr "Egzersiz"
+
+msgid "Choose an exercise"
+msgstr "Egzersiz seç"
+
+msgid "Sets"
+msgstr "Set"
+
+msgid "Reps"
+msgstr "Tekrar"
+
+msgid "Rest (sec)"
+msgstr "Dinlenme (sn)"
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid "Delete this day and its exercises?"
+msgstr "Bu gün ve içindeki egzersizler silinsin mi?"
+
+msgid "Delete day"
+msgstr "Günü sil"
+
+msgid "Add a day"
+msgstr "Gün ekle"
+
+msgid "Title"
+msgstr "Başlık"
+
+msgid "e.g. Legs, Push, Day A"
+msgstr "ör. Bacak, Push, A Günü"
+
+msgid "Weekday"
+msgstr "Haftanın günü"
+
+msgid "Any day"
+msgstr "Herhangi bir gün"
+
+msgid "Add day"
+msgstr "Günü ekle"
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "inactive"
+msgstr "pasif"
+
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid "Edit program"
+msgstr "Programı düzenle"
+
+msgid "Write a program"
+msgstr "Program yaz"
+
+msgid "Workout link"
+msgstr "Antrenman linki"
+
+msgid "No app, no password"
+msgstr "Uygulama yok, şifre yok"
+
+msgid "The client opens this on their phone to see the program and log sets. Anyone with the link can log in their name, so share it privately."
+msgstr "Öğrencin bu linki telefonunda açıp programını görür ve setlerini girer. Linke sahip olan herkes onun adına kayıt girebilir, bu yüzden yalnızca ona gönder."
+
+msgid "Copied"
+msgstr "Kopyalandı"
+
+msgid "Copy"
+msgstr "Kopyala"
+
+msgid "Send on WhatsApp"
+msgstr "WhatsApp'tan gönder"
+
+msgid "Open as client"
+msgstr "Öğrenci gibi aç"
+
+msgid "The current link will stop working. Continue?"
+msgstr "Mevcut link çalışmaz hale gelecek. Devam edilsin mi?"
+
+msgid "Create a new link"
+msgstr "Yeni link oluştur"
+
+msgid "Recent workouts"
+msgstr "Son antrenmanlar"
+
+msgid "in progress"
+msgstr "devam ediyor"
+
+msgid "Workouts appear here as soon as the client logs a set."
+msgstr "Öğrencin ilk setini girdiği anda antrenmanlar burada görünür."
+
+msgid "Best lifts"
+msgstr "En iyi kaldırışlar"
+
+msgid "estimated 1RM"
+msgstr "tahmini 1RM"
+
+msgid "Best set"
+msgstr "En iyi set"
+
+msgid "Date"
+msgstr "Tarih"
+
+msgid "reps"
+msgstr "tekrar"
+
+msgid "No sets logged yet."
+msgstr "Henüz set girilmedi."
+
+msgid "Packages"
+msgstr "Paketler"
+
+msgid "No package yet."
+msgstr "Henüz paket yok."
+
+msgid "Body weight"
+msgstr "Kilo"
+
+msgid "Logged at the end of each workout."
+msgstr "Her antrenmanın sonunda girilir."
+
+msgid "Details"
+msgstr "Bilgiler"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Email"
+msgstr "E-posta"
+
+msgid "Since"
+msgstr "Başlangıç"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Target %(t)s kg"
+msgstr "Hedef %(t)s kg"
+
+msgid "Who trained, whose package is running out, and who has gone quiet."
+msgstr "Kim antrenman yaptı, kimin paketi bitiyor, kim ortadan kayboldu."
+
+msgid "Add client"
+msgstr "Öğrenci ekle"
+
+msgid "active clients"
+msgstr "aktif öğrenci"
+
+msgid "workouts this week"
+msgstr "antrenman bu hafta"
+
+msgid "trained today"
+msgstr "bugün antrenman yaptı"
+
+msgid "Trained today"
+msgstr "Bugün antrenman yapanlar"
+
+msgid "No one has logged a workout yet today."
+msgstr "Bugün henüz kimse antrenman girmedi."
+
+msgid "Packages to renew"
+msgstr "Yenilenecek paketler"
+
+msgid "Nothing ends in the next 7 days."
+msgstr "Önümüzdeki 7 günde biten paket yok."
+
+msgid "Quiet for a week"
+msgstr "Bir haftadır sessiz"
+
+msgid "No workouts logged yet"
+msgstr "Henüz antrenman girilmedi"
+
+msgid "Everyone trained this week."
+msgstr "Bu hafta herkes antrenman yaptı."
+
+msgid "Last workout %(d)s ago"
+msgstr "Son antrenman %(d)s önce"
+
+msgid "Filter by muscle"
+msgstr "Kas grubuna göre filtrele"
+
+msgid "All"
+msgstr "Tümü"
+
+msgid "yours"
+msgstr "senin"
+
+msgid "Add your own"
+msgstr "Kendi egzersizini ekle"
+
+msgid "Add exercise"
+msgstr "Egzersiz ekle"
+
+msgid "Client's note"
+msgstr "Öğrencinin notu"
+
+msgid "No sets logged in this workout."
+msgstr "Bu antrenmanda set girilmedi."
+
+msgid "Search by name or phone"
+msgstr "İsim ya da telefonla ara"
+
+msgid "Show"
+msgstr "Göster"
+
+msgid "Active"
+msgstr "Aktif"
+
+msgid "No package"
+msgstr "Paket yok"
+
+msgid "No client matches that search."
+msgstr "Bu aramaya uyan öğrenci yok."
+
+msgid "Add your first client to get their workout link."
+msgstr "İlk öğrencini ekle, antrenman linki hemen oluşsun."
+
+msgid "Count a session"
+msgstr "Seans düş"
+
+msgid "Remove %(name)s"
+msgstr "%(name)s kaldır"
+
+msgid "You have a workout in progress"
+msgstr "Yarım kalan bir antrenmanın var"
+
+msgid "Continue workout"
+msgstr "Antrenmana devam et"
+
+msgid "Today's workout"
+msgstr "Bugünün antrenmanı"
+
+msgid "Start workout"
+msgstr "Antrenmanı başlat"
+
+msgid "No program yet"
+msgstr "Henüz program yok"
+
+msgid "Your coach will add one. This page updates by itself, keep the link."
+msgstr "Antrenörün ekleyecek. Bu sayfa kendiliğinden güncellenir, linki sakla."
+
+msgid "Or pick another day"
+msgstr "Ya da başka bir gün seç"
+
+msgid "exercises"
+msgstr "egzersiz"
+
+msgid "Note from your coach"
+msgstr "Antrenörünün notu"
+
+msgid "Recent"
+msgstr "Son antrenmanlar"
+
+msgid "My progress"
+msgstr "Gelişimim"
+
+msgid "Hi %(name)s"
+msgstr "Merhaba %(name)s"
+
+msgid "Program by %(coach)s"
+msgstr "Programı yazan: %(coach)s"
+
+msgid "Set"
+msgstr "Set"
+
+msgid "Delete set %(n)s"
+msgstr "%(n)s. seti sil"
+
+msgid "Your best set for every exercise."
+msgstr "Her egzersizdeki en iyi setin."
+
+msgid "Log your first set and it shows up here."
+msgstr "İlk setini gir, burada görünsün."
+
+msgid "History"
+msgstr "Geçmiş"
+
+msgid "No workouts yet."
+msgstr "Henüz antrenman yok."
+
+msgid "Back to my program"
+msgstr "Programıma dön"
+
+msgid "Workout saved"
+msgstr "Antrenman kaydedildi"
+
+msgid "total volume"
+msgstr "toplam hacim"
+
+msgid "New personal bests"
+msgstr "Yeni rekorların"
+
+msgid "Target"
+msgstr "Hedef"
+
+msgid "Rest"
+msgstr "Dinlenme"
+
+msgid "Last time"
+msgstr "Geçen sefer"
+
+msgid "Log set"
+msgstr "Seti kaydet"
+
+msgid "This day has no exercises yet."
+msgstr "Bu günde henüz egzersiz yok."
+
+msgid "Note for your coach"
+msgstr "Antrenörüne not"
+
+msgid "Finish workout"
+msgstr "Antrenmanı bitir"
+
+msgid "Strength"
+msgstr "Güç"
+
+msgid "Muscle gain"
+msgstr "Kas kazanımı"
+
+msgid "Fat loss"
+msgstr "Yağ yakımı"
+
+msgid "Mobility and rehab"
+msgstr "Mobilite ve rehabilitasyon"
+
+msgid "General fitness"
+msgstr "Genel kondisyon"
+
+msgid "full name"
+msgstr "ad soyad"
+
+msgid "phone"
+msgstr "telefon"
+
+msgid "email"
+msgstr "e-posta"
+
+msgid "goal"
+msgstr "hedef"
+
+msgid "target body weight (kg)"
+msgstr "hedef kilo (kg)"
+
+msgid "notes"
+msgstr "notlar"
+
+msgid "Injuries, preferences, anything worth remembering."
+msgstr "Sakatlıklar, tercihler, akılda tutulması gereken her şey."
+
+msgid "active"
+msgstr "aktif"
+
+msgid "Ending soon"
+msgstr "Bitmek üzere"
+
+msgid "Ended"
+msgstr "Bitti"
+
+msgid "No sessions left"
+msgstr "Seans kalmadı"
+
+msgid "Starts later"
+msgstr "Henüz başlamadı"
+
+msgid "package"
+msgstr "paket"
+
+msgid "e.g. 12 PT sessions, 3 months"
+msgstr "ör. 12 PT seansı, 3 aylık"
+
+msgid "starts on"
+msgstr "başlangıç"
+
+msgid "ends on"
+msgstr "bitiş"
+
+msgid "sessions included"
+msgstr "seans sayısı"
+
+msgid "Leave empty for unlimited."
+msgstr "Sınırsız için boş bırak."
+
+msgid "sessions used"
+msgstr "kullanılan seans"
+
+msgid "price"
+msgstr "ücret"
+
+msgid "note"
+msgstr "not"
+
+msgid "Chest"
+msgstr "Göğüs"
+
+msgid "Back"
+msgstr "Sırt"
+
+msgid "Shoulders"
+msgstr "Omuz"
+
+msgid "Arms"
+msgstr "Kol"
+
+msgid "Legs"
+msgstr "Bacak"
+
+msgid "Glutes"
+msgstr "Kalça"
+
+msgid "Core"
+msgstr "Karın"
+
+msgid "Full body"
+msgstr "Tüm vücut"
+
+msgid "Cardio"
+msgstr "Kardiyo"
+
+msgid "Barbell"
+msgstr "Barbell"
+
+msgid "Dumbbell"
+msgstr "Dumbbell"
+
+msgid "Machine"
+msgstr "Makine"
+
+msgid "Cable"
+msgstr "Kablo"
+
+msgid "Bodyweight"
+msgstr "Vücut ağırlığı"
+
+msgid "Kettlebell"
+msgstr "Kettlebell"
+
+msgid "Band"
+msgstr "Bant"
+
+msgid "Other"
+msgstr "Diğer"
+
+msgid "name (Turkish)"
+msgstr "ad (Türkçe)"
+
+msgid "name (English)"
+msgstr "ad (İngilizce)"
+
+msgid "muscle group"
+msgstr "kas grubu"
+
+msgid "equipment"
+msgstr "ekipman"
+
+msgid "coaching cue"
+msgstr "ipucu"
+
+msgid "title"
+msgstr "başlık"
+
+msgid "notes for the client"
+msgstr "öğrenciye notlar"
+
+msgid "Monday"
+msgstr "Pazartesi"
+
+msgid "Tuesday"
+msgstr "Salı"
+
+msgid "Wednesday"
+msgstr "Çarşamba"
+
+msgid "Thursday"
+msgstr "Perşembe"
+
+msgid "Friday"
+msgstr "Cuma"
+
+msgid "Saturday"
+msgstr "Cumartesi"
+
+msgid "Sunday"
+msgstr "Pazar"
+
+msgid "day title"
+msgstr "gün başlığı"
+
+msgid "weekday"
+msgstr "haftanın günü"
+
+msgid "sets"
+msgstr "set"
+
+msgid "e.g. 5, 8-10, 30 sec"
+msgstr "ör. 5, 8-10, 30 sn"
+
+msgid "weight (kg)"
+msgstr "ağırlık (kg)"
+
+msgid "rest (sec)"
+msgstr "dinlenme (sn)"
+
+msgid "date"
+msgstr "tarih"
+
+msgid "body weight (kg)"
+msgstr "kilo (kg)"
+
+msgid "how did it go?"
+msgstr "nasıl geçti?"
+
+msgid "Free session"
+msgstr "Serbest antrenman"
+
+msgid "The end date can't be before the start date."
+msgstr "Bitiş tarihi başlangıçtan önce olamaz."
+
+msgid "Start from"
+msgstr "Şununla başla"
+
+msgid "An empty program"
+msgstr "Boş bir program"
+
+msgid "Give the program a title or pick a starter."
+msgstr "Programa bir başlık ver ya da hazır bir şablon seç."
+
+msgid "Energy, pain, anything your coach should know"
+msgstr "Enerji, ağrı, antrenörünün bilmesi gereken her şey"
+
+msgid "%(name)s added. Share their link so they can log workouts."
+msgstr "%(name)s eklendi. Antrenmanlarını girebilmesi için linkini paylaş."
+
+msgid "New client"
+msgstr "Yeni öğrenci"
+
+msgid "Changes saved."
+msgstr "Değişiklikler kaydedildi."
+
+msgid "New link created. The old one no longer works."
+msgstr "Yeni link oluşturuldu. Eskisi artık çalışmıyor."
+
+msgid "Package added."
+msgstr "Paket eklendi."
+
+msgid "New package for %(name)s"
+msgstr "%(name)s için yeni paket"
+
+msgid "No sessions left on this package."
+msgstr "Bu pakette seans kalmadı."
+
+msgid "New program for %(name)s"
+msgstr "%(name)s için yeni program"
+
+msgid "Give the day a title."
+msgstr "Güne bir başlık ver."
+
+msgid "Check the exercise fields."
+msgstr "Egzersiz alanlarını kontrol et."
+
+msgid "Exercise added to your library."
+msgstr "Egzersiz kütüphanene eklendi."
+
+msgid "Turkish"
+msgstr "Türkçe"
+
+msgid "English"
+msgstr "İngilizce"
+
+msgid "%(n)s set"
+msgid_plural "%(n)s sets"
+msgstr[0] "%(n)s set"
+msgstr[1] "%(n)s set"
+
+msgid "%(n)s session left"
+msgid_plural "%(n)s sessions left"
+msgstr[0] "%(n)s seans kaldı"
+msgstr[1] "%(n)s seans kaldı"
+
+msgid "%(n)s exercise, in Turkish and English."
+msgid_plural "%(n)s exercises, in Turkish and English."
+msgstr[0] "%(n)s egzersiz, Türkçe ve İngilizce."
+msgstr[1] "%(n)s egzersiz, Türkçe ve İngilizce."
+
+msgid "%(n)s workout"
+msgid_plural "%(n)s workouts"
+msgstr[0] "%(n)s antrenman"
+msgstr[1] "%(n)s antrenman"
+
+msgid "set logged"
+msgid_plural "sets logged"
+msgstr[0] "set girildi"
+msgstr[1] "set girildi"

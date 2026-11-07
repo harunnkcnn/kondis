@@ -1,0 +1,18 @@
+{% extends "coaching/portal/base.html" %}{% load i18n kondis %}
+{% block content %}
+<section class="hello">
+  <h1>{% translate "Workout saved" %}</h1>
+  <p>{{ workout.title }} · {{ workout.performed_on|date:"j F" }}</p>
+</section>
+<section class="exercise" style="margin-top:1.25rem">
+  <p class="done-number num">{{ set_count }}</p>
+  <p class="muted" style="margin:0">{% blocktranslate count n=set_count %}set logged{% plural %}sets logged{% endblocktranslate %} · {{ workout.volume|floatformat:"0g" }} kg {% translate "total volume" %}</p>
+</section>
+{% if new_records %}
+<section class="exercise">
+  <h2>{% translate "New personal bests" %}</h2>
+  {% for r in new_records %}<div class="pr"><span class="plate" data-load="{{ r.best_weight|plate }}">★</span><span class="grow">{{ r.exercise.name }}<span class="sub muted small">{% if r.exercise.is_bodyweight %}{{ r.best_reps }} {% translate "reps" %}{% else %}{{ r.best_weight|kg }} kg × {{ r.best_reps }} · 1RM ≈ {{ r.estimated_1rm|kg }} kg{% endif %}</span></span></div>{% endfor %}
+</section>
+{% endif %}
+<nav class="portal-nav"><a class="btn btn-primary" href="{% url 'portal:home' client.access_token %}">{% translate "Back to my program" %}</a><a class="btn" href="{% url 'portal:progress' client.access_token %}">{% translate "My progress" %}</a></nav>
+{% endblock %}

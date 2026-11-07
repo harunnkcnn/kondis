@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Clients" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% translate "Clients" %}</h1>
+  <a class="btn btn-primary" href="{% url 'coaching:client_create' %}">{% translate "Add client" %}</a>
+</div>
+<section class="panel">
+  <form class="search" method="get" hx-get="{% url 'coaching:client_list' %}" hx-target="#client-rows" hx-trigger="input changed delay:250ms from:input, change from:select" role="search">
+    <label class="visually-hidden" for="q">{% translate "Search by name or phone" %}</label>
+    <input id="q" type="search" name="q" value="{{ q }}" placeholder="{% translate 'Search by name or phone' %}" autocomplete="off">
+    <label class="visually-hidden" for="show">{% translate "Show" %}</label>
+    <select id="show" name="show">
+      <option value="active" {% if show == 'active' %}selected{% endif %}>{% translate "Active" %}</option>
+      <option value="all" {% if show == 'all' %}selected{% endif %}>{% translate "All" %}</option>
+    </select>
+  </form>
+  <ul class="rows" id="client-rows">{% include "coaching/partials/client_rows.html" %}</ul>
+</section>
+{% endblock %}

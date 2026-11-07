@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    image: ghcr.io/harunnkcnn/kondis:latest
+    env_file: .env
+    ports:
+      - "${KONDIS_PORT:-8000}:8000"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

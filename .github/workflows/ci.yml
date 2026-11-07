@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: Lint
+        run: ruff check . && ruff format --check coaching config
+      - name: Check translations compile
+        run: pybabel compile -i locale/tr/LC_MESSAGES/django.po -o /tmp/django.mo -l tr
+      - name: Django checks
+        env:
+          KONDIS_SECRET_KEY: ci-only
+        run: |
+          python manage.py check --deploy --fail-level ERROR
+          python manage.py makemigrations --check --dry-run
+      - name: Tests
+        env:
+          KONDIS_DEBUG: "1"
+        run: python manage.py test -v2
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t kondis:ci .

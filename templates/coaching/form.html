@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{{ title }}</h1>{% if back %}<a class="btn btn-quiet" href="{{ back }}">{% translate "Cancel" %}</a>{% endif %}</div>
+<section class="panel">
+  <form method="post" class="form" novalidate>{% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      {% if field.is_hidden %}{{ field }}{% else %}
+      <div class="field{% if field.widget_type == 'checkbox' %} field-check{% endif %}">
+        {% if field.widget_type == 'checkbox' %}{{ field }}{{ field.label_tag }}{% else %}{{ field.label_tag }}{{ field }}{% endif %}
+        {% if field.help_text %}<div class="help">{{ field.help_text }}</div>{% endif %}
+        {{ field.errors }}
+      </div>{% endif %}
+    {% endfor %}
+    <div class="btn-row"><button class="btn btn-primary" type="submit">{% translate "Save" %}</button></div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Today" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% now "l, j F" %}</h1>
+    <p>{% translate "Who trained, whose package is running out, and who has gone quiet." %}</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'coaching:client_create' %}">{% translate "Add client" %}</a>
+</div>
+
+<div class="tally">
+  <div><span class="num">{{ board.active_clients }}</span><span>{% translate "active clients" %}</span></div>
+  <div><span class="num">{{ board.workouts_this_week }}</span><span>{% translate "workouts this week" %}</span></div>
+  <div><span class="num">{{ board.trained_today|length }}</span><span>{% translate "trained today" %}</span></div>
+</div>
+
+<div class="grid">
+  <section class="panel" aria-labelledby="h-today">
+    <h2 id="h-today">{% translate "Trained today" %}</h2>
+    <ul class="rows">
+      {% for w in board.trained_today %}
+      <li>
+        <span class="avatar" aria-hidden="true">{{ w.client.initials }}</span>
+        <span class="grow"><a href="{% url 'coaching:workout_detail' w.pk %}">{{ w.client }}</a>
+          <span class="sub">{{ w.title }}{% if not w.is_finished %} · {% translate "in progress" %}{% endif %}</span></span>
+      </li>
+      {% empty %}<li class="empty">{% translate "No one has logged a workout yet today." %}</li>{% endfor %}
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="h-renew">
+    <h2 id="h-renew">{% translate "Packages to renew" %}</h2>
+    <ul class="rows">
+      {% for m in board.expiring %}
+      <li>
+        <span class="grow"><a href="{{ m.client.get_absolute_url }}">{{ m.client }}</a>
+          <span class="sub">{{ m.package_name }} · {{ m.ends_on|date:"j M" }}{% if m.sessions_left is not None %} · {% blocktranslate count n=m.sessions_left %}{{ n }} session left{% plural %}{{ n }} sessions left{% endblocktranslate %}{% endif %}</span></span>
+        <span class="status status-{{ m.status }}">{{ m.status_label }}</span>
+      </li>
+      {% empty %}<li class="empty">{% translate "Nothing ends in the next 7 days." %}</li>{% endfor %}
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="h-quiet">
+    <h2 id="h-quiet">{% translate "Quiet for a week" %}</h2>
+    <ul class="rows">
+      {% for c in board.quiet_clients %}
+      <li>
+        <span class="avatar" aria-hidden="true">{{ c.initials }}</span>
+        <span class="grow"><a href="{{ c.get_absolute_url }}">{{ c }}</a>
+          <span class="sub">{% if c.last_seen %}{% blocktranslate with d=c.last_seen|timesince %}Last workout {{ d }} ago{% endblocktranslate %}{% else %}{% translate "No workouts logged yet" %}{% endif %}</span></span>
+        {% if c.phone %}<a class="btn btn-quiet small" href="https://wa.me/{{ c.phone|cut:' '|cut:'+'|cut:'-' }}" target="_blank" rel="noopener">WhatsApp</a>{% endif %}
+      </li>
+      {% empty %}<li class="empty">{% translate "Everyone trained this week." %}</li>{% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

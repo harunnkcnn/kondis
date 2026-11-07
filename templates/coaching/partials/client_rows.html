@@ -1,0 +1,10 @@
+{% load i18n %}{% for c in clients %}
+<li>
+  <span class="avatar" aria-hidden="true">{{ c.initials }}</span>
+  <span class="grow"><a href="{{ c.get_absolute_url }}">{{ c }}</a>
+    <span class="sub">{{ c.get_goal_display }} · {% blocktranslate count n=c.workout_count %}{{ n }} workout{% plural %}{{ n }} workouts{% endblocktranslate %}{% if c.last_seen %} · {{ c.last_seen|date:"j M" }}{% endif %}</span></span>
+  {% with m=c.current_membership %}{% if m %}<span class="status status-{{ m.status }}">{{ m.status_label }}</span>{% else %}<span class="tag">{% translate "No package" %}</span>{% endif %}{% endwith %}
+</li>
+{% empty %}
+<li class="empty">{% if q %}{% translate "No client matches that search." %}{% else %}{% translate "Add your first client to get their workout link." %}{% endif %}</li>
+{% endfor %}

@@ -1,0 +1,41 @@
+{% load i18n static %}<!doctype html>
+{% get_current_language as LANG %}
+<html lang="{{ LANG }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Kondis{% endblock %} | Kondis</title>
+  <meta name="theme-color" content="#03060b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/kondis.css' %}">
+  <link rel="icon" href="data:image/svg+xml,{% filter urlencode %}{% include '_logo.html' %}{% endfilter %}">
+  <script src="{% static 'js/htmx.min.js' %}" defer></script>
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+{% block shell %}
+<header class="bar">
+  <a class="brand" href="{% url 'coaching:dashboard' %}">{% include '_logo.html' %}Kondis</a>
+  {% if user.is_authenticated %}
+  <nav class="nav" aria-label="{% translate 'Main' %}">
+    <a href="{% url 'coaching:dashboard' %}" {% if nav == 'today' %}aria-current="page"{% endif %}>{% translate "Today" %}</a>
+    <a href="{% url 'coaching:client_list' %}" {% if nav == 'clients' %}aria-current="page"{% endif %}>{% translate "Clients" %}</a>
+    <a href="{% url 'coaching:exercise_list' %}" {% if nav == 'library' %}aria-current="page"{% endif %}>{% translate "Exercises" %}</a>
+  </nav>
+  {% endif %}
+  <div class="end">
+    {% include '_language.html' %}
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'logout' %}" class="inline">{% csrf_token %}<button type="submit">{% translate "Sign out" %}</button></form>
+    {% endif %}
+  </div>
+</header>
+<main>
+  {% if messages %}<ul class="messages" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>{% endif %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="foot">Kondis {% if KONDIS_EDITION == 'pro' %}Pro{% else %}Community{% endif %} · AGPL-3.0</footer>
+{% endblock %}
+</body>
+</html>

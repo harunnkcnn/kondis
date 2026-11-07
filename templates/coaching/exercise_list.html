@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Exercises" %}{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>{% translate "Exercises" %}</h1><p>{% blocktranslate count n=exercises|length %}{{ n }} exercise, in Turkish and English.{% plural %}{{ n }} exercises, in Turkish and English.{% endblocktranslate %}</p></div></div>
+<div class="split">
+  <section class="panel">
+    <nav class="chips" aria-label="{% translate 'Filter by muscle' %}">
+      <a href="?" {% if not muscle %}aria-current="true"{% endif %}>{% translate "All" %}</a>
+      {% for v, l in muscles %}<a href="?muscle={{ v }}" {% if muscle == v %}aria-current="true"{% endif %}>{{ l }}</a>{% endfor %}
+    </nav>
+    <ul class="rows">{% for e in exercises %}
+      <li><span class="grow"><strong>{{ e.name }}</strong>{% if e.cue %}<span class="cue sub">{{ e.cue }}</span>{% endif %}</span>
+        <span class="tag">{{ e.get_equipment_display }}</span>{% if e.trainer_id %}<span class="tag">{% translate "yours" %}</span>{% endif %}</li>
+    {% endfor %}</ul>
+  </section>
+  <section class="panel">
+    <h2>{% translate "Add your own" %}</h2>
+    <form method="post" class="form" novalidate>{% csrf_token %}
+      {% for field in form %}<div class="field">{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}
+      <button class="btn btn-primary" type="submit">{% translate "Add exercise" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

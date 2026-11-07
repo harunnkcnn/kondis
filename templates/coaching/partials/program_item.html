@@ -1,0 +1,7 @@
+{% load i18n kondis %}<li id="item-{{ item.pk }}">
+  <span>{{ item.exercise.name }}{% if item.note %}<span class="sub muted small">{{ item.note }}</span>{% endif %}</span>
+  <span class="dose num">{{ item.sets }}×{{ item.reps }}</span>
+  <span class="muted small">{{ item.rest_seconds }} sn</span>
+  <button class="btn btn-quiet small" hx-post="{% url 'coaching:program_item_delete' item.pk %}" hx-target="#item-{{ item.pk }}" hx-swap="outerHTML"
+    aria-label="{% blocktranslate with name=item.exercise.name %}Remove {{ name }}{% endblocktranslate %}">✕</button>
+</li>

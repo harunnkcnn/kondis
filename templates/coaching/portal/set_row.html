@@ -1,0 +1,6 @@
+{% load i18n kondis %}<li class="set" id="set-{{ s.pk }}">
+  <span class="plate" data-load="{{ s.weight|plate }}" title="{% translate 'Set' %} {{ s.set_number }}">{{ s.set_number }}</span>
+  <span class="load num">{% if s.exercise.is_bodyweight %}{{ s.reps }} <small>{% translate "reps" %}</small>{% else %}{{ s.weight|kg }} <small>kg</small> × {{ s.reps }}{% endif %}</span>
+  {% if not workout.is_finished %}<button type="button" hx-post="{% url 'portal:delete_set' client.access_token workout.pk s.pk %}" hx-target="#set-{{ s.pk }}" hx-swap="outerHTML"
+    aria-label="{% blocktranslate with n=s.set_number %}Delete set {{ n }}{% endblocktranslate %}">✕</button>{% endif %}
+</li>

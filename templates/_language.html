@@ -1,0 +1,9 @@
+{% load i18n %}{% get_current_language as LANG %}<form action="{% url 'set_language' %}" method="post" class="inline lang">{% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  <label class="visually-hidden" for="lang-{{ lang_id|default:'top' }}">{% translate "Language" %}</label>
+  <select id="lang-{{ lang_id|default:'top' }}" name="language" onchange="this.form.submit()">
+    <option value="tr" {% if LANG == 'tr' %}selected{% endif %}>TR</option>
+    <option value="en" {% if LANG == 'en' %}selected{% endif %}>EN</option>
+  </select>
+  <noscript><button type="submit">{% translate "Change" %}</button></noscript>
+</form>

@@ -1,0 +1,44 @@
+{% extends "coaching/portal/base.html" %}{% load i18n kondis %}
+{% block title %}{{ workout.title }}{% endblock %}
+{% block content %}
+<section class="hello" style="margin-bottom:1rem">
+  <h1>{{ workout.title }}</h1>
+  <p>{{ workout.performed_on|date:"l j F" }}</p>
+</section>
+
+{% for b in blocks %}
+<section class="exercise" aria-labelledby="ex-{{ b.item.pk }}">
+  <h2 id="ex-{{ b.item.pk }}">{{ b.exercise.name }}</h2>
+  <p class="target"><span>{% translate "Target" %} <strong>{{ b.item.sets }} × {{ b.item.reps }}</strong>{% if b.item.target_weight %} @ {{ b.item.target_weight|kg }} kg{% endif %}</span><span>{% translate "Rest" %} {{ b.item.rest_seconds }} sn</span></p>
+  {% if b.item.note or b.exercise.cue %}<p class="prev">{{ b.item.note|default:b.exercise.cue }}</p>{% endif %}
+  {% if b.previous %}<p class="prev">{% translate "Last time" %}: {% for p in b.previous %}{% if b.exercise.is_bodyweight %}{{ p.reps }}{% else %}{{ p.weight|kg }}×{{ p.reps }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+  <ul class="sets" id="sets-{{ b.item.pk }}">{% for s in b.sets %}{% include "coaching/portal/set_row.html" %}{% endfor %}</ul>
+  {% if not workout.is_finished %}
+  <form class="log-set" hx-post="{% url 'portal:add_set' client.access_token workout.pk %}" hx-target="#sets-{{ b.item.pk }}" hx-swap="beforeend settle:300ms"
+        method="post" action="{% url 'portal:add_set' client.access_token workout.pk %}">
+    {% csrf_token %}
+    <input type="hidden" name="exercise" value="{{ b.exercise.pk }}"><input type="hidden" name="item" value="{{ b.item.pk }}">
+    {% with last=b.sets|last first_prev=b.previous|first %}
+    {% if not b.exercise.is_bodyweight %}<div><label for="w-{{ b.item.pk }}">kg</label>
+      <input id="w-{{ b.item.pk }}" name="weight" type="number" step="0.5" min="0" inputmode="decimal" value="{% if last %}{{ last.weight|kg }}{% elif first_prev %}{{ first_prev.weight|kg }}{% elif b.item.target_weight %}{{ b.item.target_weight|kg }}{% endif %}"></div>{% endif %}
+    <div {% if b.exercise.is_bodyweight %}style="grid-column: span 2"{% endif %}><label for="r-{{ b.item.pk }}">{% translate "reps" %}</label>
+      <input id="r-{{ b.item.pk }}" name="reps" type="number" min="1" max="500" inputmode="numeric" required value="{% if last %}{{ last.reps }}{% elif first_prev %}{{ first_prev.reps }}{% endif %}"></div>
+    {% endwith %}
+    <button class="btn btn-primary" type="submit">{% translate "Log set" %}</button>
+  </form>
+  {% endif %}
+</section>
+{% empty %}
+<p class="empty">{% translate "This day has no exercises yet." %}</p>
+{% endfor %}
+
+{% if not workout.is_finished %}
+<form class="finish" method="post" action="{% url 'portal:finish' client.access_token workout.pk %}">{% csrf_token %}
+  <div class="row">
+    <div><label class="small muted" for="id_body_weight">{% translate "Body weight" %}</label>{{ finish_form.body_weight }}</div>
+    <div><label class="small muted" for="id_note">{% translate "Note for your coach" %}</label>{{ finish_form.note }}</div>
+  </div>
+  <button class="btn btn-primary" type="submit">{% translate "Finish workout" %}</button>
+</form>
+{% endif %}
+{% endblock %}

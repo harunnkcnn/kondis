@@ -1,0 +1,3 @@
+-r requirements.txt
+babel>=2.16
+ruff>=0.8

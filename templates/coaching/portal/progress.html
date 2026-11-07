@@ -1,0 +1,13 @@
+{% extends "coaching/portal/base.html" %}{% load i18n kondis %}
+{% block title %}{% translate "My progress" %}{% endblock %}
+{% block content %}
+<section class="hello"><h1>{% translate "My progress" %}</h1><p>{% translate "Your best set for every exercise." %}</p></section>
+<section class="exercise" style="margin-top:1.25rem">
+  {% for r in records %}<div class="pr"><span class="plate" data-load="{{ r.best_weight|plate }}">{{ forloop.counter }}</span><span class="grow">{{ r.exercise.name }}<span class="sub muted small">{{ r.performed_on|date:"j M" }}</span></span>
+    <span class="num">{% if r.exercise.is_bodyweight %}{{ r.best_reps }} <small class="muted">{% translate "reps" %}</small>{% else %}{{ r.best_weight|kg }}×{{ r.best_reps }}{% endif %}</span></div>
+  {% empty %}<p class="empty">{% translate "Log your first set and it shows up here." %}</p>{% endfor %}
+</section>
+<h2 style="margin:1.5rem 0 .6rem">{% translate "History" %}</h2>
+<ul class="rows exercise">{% for w in history %}<li><span class="grow">{{ w.title }}<span class="sub">{{ w.performed_on|date:"l j M" }}{% if w.body_weight %} · {{ w.body_weight|kg }} kg{% endif %}</span></span></li>{% empty %}<li class="empty">{% translate "No workouts yet." %}</li>{% endfor %}</ul>
+<nav class="portal-nav"><a class="btn" href="{% url 'portal:home' client.access_token %}">{% translate "Back to my program" %}</a></nav>
+{% endblock %}

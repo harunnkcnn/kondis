@@ -1,0 +1,41 @@
+{% extends "coaching/portal/base.html" %}{% load i18n kondis %}
+{% block content %}
+<section class="hello">
+  <h1>{% blocktranslate with name=client.full_name.split.0 %}Hi {{ name }}{% endblocktranslate %}</h1>
+  <p>{% blocktranslate with coach=client.trainer.get_full_name|default:client.trainer.username %}Program by {{ coach }}{% endblocktranslate %}{% if membership %} · <span class="status status-{{ membership.status }}">{% if membership.sessions_left is not None %}{% blocktranslate count n=membership.sessions_left %}{{ n }} session left{% plural %}{{ n }} sessions left{% endblocktranslate %}{% else %}{{ membership.status_label }}{% endif %}</span>{% endif %}</p>
+</section>
+
+{% if open_workout %}
+<section class="today">
+  <p class="muted" style="margin:0">{% translate "You have a workout in progress" %}</p>
+  <h2>{{ open_workout.title }}</h2>
+  <a class="btn btn-primary" style="margin-top:1rem" href="{% url 'portal:workout' client.access_token open_workout.pk %}">{% translate "Continue workout" %}</a>
+</section>
+{% elif suggested %}
+<section class="today">
+  <p class="muted" style="margin:0">{% translate "Today's workout" %}</p>
+  <h2>{{ suggested.title }}</h2>
+  <ol>{% for item in suggested.items.all %}<li>{{ item.exercise.name }} <span class="muted">{{ item.sets }}×{{ item.reps }}</span></li>{% endfor %}</ol>
+  <form method="post" action="{% url 'portal:start' client.access_token suggested.pk %}">{% csrf_token %}
+    <button class="btn btn-primary" type="submit">{% translate "Start workout" %}</button></form>
+</section>
+{% else %}
+<section class="today"><h2>{% translate "No program yet" %}</h2><p class="muted">{% translate "Your coach will add one. This page updates by itself, keep the link." %}</p></section>
+{% endif %}
+
+{% if days|length > 1 %}
+<h2 style="margin:1.5rem 0 .6rem">{% translate "Or pick another day" %}</h2>
+<div class="day-pick">{% for day in days %}{% if day != suggested %}
+  <form method="post" action="{% url 'portal:start' client.access_token day.pk %}">{% csrf_token %}
+    <button class="btn" type="submit"><span>{{ day.title }}</span><span class="muted small">{{ day.items.all|length }} {% translate "exercises" %}</span></button></form>
+{% endif %}{% endfor %}</div>
+{% endif %}
+
+{% if program.notes %}<section class="exercise" style="margin-top:1.5rem"><h2>{% translate "Note from your coach" %}</h2><p style="margin:.4rem 0 0">{{ program.notes }}</p></section>{% endif %}
+
+{% if recent %}
+<h2 style="margin:1.5rem 0 .6rem">{% translate "Recent" %}</h2>
+<ul class="rows exercise">{% for w in recent %}<li><span class="grow">{{ w.title }}<span class="sub">{{ w.performed_on|date:"l j M" }}</span></span>{% if w.is_finished %}<span class="status status-active">{% translate "Done" %}</span>{% endif %}</li>{% endfor %}</ul>
+{% endif %}
+<nav class="portal-nav"><a class="btn" href="{% url 'portal:progress' client.access_token %}">{% translate "My progress" %}</a></nav>
+{% endblock %}

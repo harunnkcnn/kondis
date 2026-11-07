@@ -1,0 +1,44 @@
+{% extends "base.html" %}{% load i18n kondis %}
+{% block title %}{{ program }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>{{ program }}</h1><p><a href="{{ program.client.get_absolute_url }}">{{ program.client }}</a>{% if program.notes %} · {{ program.notes }}{% endif %}</p></div>
+  <a class="btn" href="{{ program.client.get_absolute_url }}">{% translate "Done" %}</a>
+</div>
+
+<div class="grid">
+  {% for day in days %}
+  <section class="day" aria-labelledby="day-{{ day.pk }}">
+    <header>
+      <h2 id="day-{{ day.pk }}">{{ day.title }}</h2>
+      <span class="muted">{% if day.weekday is not None %}{{ day.get_weekday_display }}{% else %}{% translate "any day" %}{% endif %}</span>
+    </header>
+    <ul class="items" id="items-{{ day.pk }}">
+      {% for item in day.items.all %}{% include "coaching/partials/program_item.html" %}{% endfor %}
+    </ul>
+    <form class="add-item" hx-post="{% url 'coaching:program_item_add' day.pk %}" hx-target="#items-{{ day.pk }}" hx-swap="beforeend"
+          hx-on::after-request="if(event.detail.successful) this.reset()" method="post" action="{% url 'coaching:program_item_add' day.pk %}">
+      {% csrf_token %}
+      <div class="wide"><label for="ex-{{ day.pk }}">{% translate "Exercise" %}</label>
+        <select id="ex-{{ day.pk }}" name="exercise" required><option value="">{% translate "Choose an exercise" %}</option>{% for value, label in item_form.fields.exercise.choices %}{% if value %}<option value="{{ value }}">{{ label }}</option>{% endif %}{% endfor %}</select></div>
+      <div><label for="sets-{{ day.pk }}">{% translate "Sets" %}</label><input id="sets-{{ day.pk }}" name="sets" type="number" min="1" max="20" value="3" inputmode="numeric"></div>
+      <div><label for="reps-{{ day.pk }}">{% translate "Reps" %}</label><input id="reps-{{ day.pk }}" name="reps" value="8-10"></div>
+      <div><label for="rest-{{ day.pk }}">{% translate "Rest (sec)" %}</label><input id="rest-{{ day.pk }}" name="rest_seconds" type="number" min="0" max="900" value="90" inputmode="numeric"></div>
+      <button class="btn btn-primary" type="submit">{% translate "Add" %}</button>
+    </form>
+    <form method="post" action="{% url 'coaching:program_day_delete' day.pk %}" onsubmit="return confirm('{% translate "Delete this day and its exercises?" %}')" style="margin-top:.6rem">{% csrf_token %}
+      <button class="btn btn-quiet small" type="submit">{% translate "Delete day" %}</button></form>
+  </section>
+  {% endfor %}
+
+  <section class="day" aria-labelledby="h-newday">
+    <header><h2 id="h-newday">{% translate "Add a day" %}</h2></header>
+    <form method="post" action="{% url 'coaching:program_day_add' program.pk %}" class="form">{% csrf_token %}
+      <div class="field"><label for="d-title">{% translate "Title" %}</label><input id="d-title" name="title" required placeholder="{% translate 'e.g. Legs, Push, Day A' %}"></div>
+      <div class="field"><label for="d-wd">{% translate "Weekday" %}</label>
+        <select id="d-wd" name="weekday"><option value="">{% translate "Any day" %}</option>{% for v, l in day_form.fields.weekday.choices %}{% if v != '' %}<option value="{{ v }}">{{ l }}</option>{% endif %}{% endfor %}</select></div>
+      <button class="btn" type="submit">{% translate "Add day" %}</button>
+    </form>
+  </section>
+</div>
+{% endblock %}
