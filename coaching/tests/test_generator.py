@@ -137,6 +137,18 @@ class GeneratorViewTests(TestCase):
         self.assertEqual(Program.objects.count(), 2)
         self.assertRedirects(response, reverse("coaching:program_builder", args=[Program.objects.get(is_active=True).pk]))
 
+    def test_previous_version_is_listed_and_can_be_reactivated(self):
+        self.post_auto()
+        first = Program.objects.get()
+        self.client.post(reverse("coaching:program_regenerate", args=[first.pk]))
+        detail = self.client.get(reverse("coaching:client_detail", args=[self.client_obj.pk]))
+        self.assertContains(detail, first.get_absolute_url())
+        self.assertContains(self.client.get(first.get_absolute_url()), reverse("coaching:program_activate", args=[first.pk]))
+        self.client.post(reverse("coaching:program_activate", args=[first.pk]))
+        first.refresh_from_db()
+        self.assertTrue(first.is_active)
+        self.assertEqual(Program.objects.filter(client=self.client_obj, is_active=True).count(), 1)
+
     def test_regenerate_is_owner_only(self):
         self.post_auto()
         program = Program.objects.get()

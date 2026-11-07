@@ -15,6 +15,7 @@ urlpatterns = [
     path("clients/<int:pk>/programs/new/", views.program_create, name="program_create"),
     path("packages/<int:pk>/use-session/", views.membership_use_session, name="membership_use_session"),
     path("programs/<int:pk>/", views.program_builder, name="program_builder"),
+    path("programs/<int:pk>/activate/", views.program_activate, name="program_activate"),
     path("programs/<int:pk>/regenerate/", views.program_regenerate, name="program_regenerate"),
     path("programs/<int:pk>/days/", views.program_day_add, name="program_day_add"),
     path("days/<int:pk>/delete/", views.program_day_delete, name="program_day_delete"),

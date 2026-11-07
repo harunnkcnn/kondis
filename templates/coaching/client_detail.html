@@ -73,6 +73,16 @@
       {% else %}<p class="empty">{% translate "Logged at the end of each workout." %}</p>{% endif %}
     </section>
 
+    {% if past_programs %}
+    <section class="panel" aria-labelledby="h-past">
+      <h2 id="h-past">{% translate "Previous programs" %}</h2>
+      <ul class="rows">{% for p in past_programs %}
+        <li><span class="grow"><a href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+          <span class="sub">{{ p.created_at|date:"j M Y" }}{% if p.generator %} · {% blocktranslate with n=p.variant|add:1 %}version {{ n }}{% endblocktranslate %}{% endif %}</span></span></li>
+      {% endfor %}</ul>
+    </section>
+    {% endif %}
+
     <section class="panel" aria-labelledby="h-info">
       <h2 id="h-info">{% translate "Details" %}</h2>
       <dl class="kv">

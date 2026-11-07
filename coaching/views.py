@@ -106,6 +106,7 @@ def client_detail(request: HttpRequest, pk: int) -> HttpResponse:
             "client": client,
             "memberships": client.memberships.all()[:5],
             "program": client.active_program,
+            "past_programs": client.programs.filter(is_active=False).order_by("-created_at")[:10],
             "workouts": workouts,
             "records": services.personal_records(client, limit=8),
             "weights": weights,
@@ -210,6 +211,16 @@ def program_builder(request: HttpRequest, pk: int) -> HttpResponse:
             "nav": "clients",
         },
     )
+
+
+@login_required
+@require_POST
+def program_activate(request: HttpRequest, pk: int) -> HttpResponse:
+    program = _program(request, pk)
+    program.is_active = True
+    program.save()  # deactivates the client's other programs
+    messages.success(request, _("This program is active again. The client sees it from now on."))
+    return redirect(program)
 
 
 @login_required

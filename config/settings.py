@@ -78,10 +78,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
+DATA_DIR = BASE_DIR / "data"
+if not os.environ.get("KONDIS_DATABASE_URL"):
+    DATA_DIR.mkdir(exist_ok=True)  # default SQLite lives here; a fresh clone has no data/ yet
+
 DATABASES = {
     "default": dj_database_url.config(
         env="KONDIS_DATABASE_URL",
-        default=f"sqlite:///{BASE_DIR / 'data' / 'kondis.sqlite3'}",
+        default=f"sqlite:///{DATA_DIR / 'kondis.sqlite3'}",
         conn_max_age=60,
     )
 }

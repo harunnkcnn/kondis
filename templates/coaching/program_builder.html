@@ -12,6 +12,13 @@
   </div>
 </div>
 
+{% if not program.is_active %}
+<div class="inactive-note" role="status">
+  <span>{% translate "This is an earlier program. The client doesn't see it." %}</span>
+  <form method="post" action="{% url 'coaching:program_activate' program.pk %}" class="inline">{% csrf_token %}
+    <button class="btn btn-primary" type="submit">{% translate "Make active" %}</button></form>
+</div>
+{% endif %}
 <div class="grid grid-wide">
   {% for day in days %}
   <section class="day" aria-labelledby="day-{{ day.pk }}">

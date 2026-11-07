@@ -67,6 +67,12 @@ msgstr "Farklı bir versiyon oluştur"
 msgid "Done"
 msgstr "Tamam"
 
+msgid "This is an earlier program. The client doesn't see it."
+msgstr "Bu eski bir program, öğrenci bunu görmüyor."
+
+msgid "Make active"
+msgstr "Aktif yap"
+
 msgid "any day"
 msgstr "herhangi bir gün"
 
@@ -196,6 +202,9 @@ msgstr "Kilo"
 msgid "Logged at the end of each workout."
 msgstr "Her antrenmanın sonunda girilir."
 
+msgid "Previous programs"
+msgstr "Önceki programlar"
+
 msgid "Details"
 msgstr "Bilgiler"
 
@@ -222,6 +231,9 @@ msgstr "Program"
 
 msgid "Target %(t)s kg"
 msgstr "Hedef %(t)s kg"
+
+msgid "version %(n)s"
+msgstr "%(n)s. versiyon"
 
 msgid "%(d)s days, %(m)s min"
 msgstr "Haftada %(d)s gün, %(m)s dk"
@@ -786,6 +798,9 @@ msgstr "Sadece otomatik oluşturulan programların farklı versiyonu olabilir."
 
 msgid "New version ready. The previous one is kept in the client's history."
 msgstr "Yeni versiyon hazır. Öncekisi öğrencinin geçmişinde duruyor."
+
+msgid "This program is active again. The client sees it from now on."
+msgstr "Program yeniden aktif. Öğrenci artık bunu görüyor."
 
 msgid "Give the day a title."
 msgstr "Güne bir başlık ver."
