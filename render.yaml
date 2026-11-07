@@ -1,0 +1,25 @@
+# One-click public demo on Render's free plan. Its disk is temporary, so the
+# demo data is re-created on every restart, which keeps the demo clean.
+services:
+  - type: web
+    name: kondis-demo
+    runtime: python
+    plan: free
+    autoDeployTrigger: "off"
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: >-
+      python manage.py migrate --noinput &&
+      python manage.py seed_demo --if-empty &&
+      gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --access-logfile -
+    healthCheckPath: /healthz/
+    envVars:
+      - key: KONDIS_SECRET_KEY
+        generateValue: true
+      - key: KONDIS_DEMO
+        value: "1"
+      - key: KONDIS_ALLOWED_HOSTS
+        value: .onrender.com
+      - key: KONDIS_CSRF_TRUSTED_ORIGINS
+        value: https://*.onrender.com
+      - key: KONDIS_LANGUAGE
+        value: tr

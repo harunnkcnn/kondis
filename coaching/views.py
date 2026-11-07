@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Max, Q
 from django.http import HttpRequest, HttpResponse
@@ -20,6 +21,23 @@ def _client(request: HttpRequest, pk: int) -> Client:
 
 def _program(request: HttpRequest, pk: int) -> Program:
     return get_object_or_404(Program.objects.select_related("client"), pk=pk, client__trainer=request.user)
+
+
+class KondisLoginView(auth_views.LoginView):
+    redirect_authenticated_user = True
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if settings.KONDIS_DEMO:
+            initial.update(username="demo")
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if settings.KONDIS_DEMO:
+            demo_client = Client.objects.filter(trainer__username="demo", is_active=True).order_by("pk").first()
+            context["demo_portal"] = demo_client.portal_path() if demo_client else None
+        return context
 
 
 def portal_url(request: HttpRequest, client: Client) -> str:

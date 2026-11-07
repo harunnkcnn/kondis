@@ -254,3 +254,34 @@ class PortalTests(Base):
         strict = HttpClient(enforce_csrf_checks=True)
         response = strict.post(reverse("portal:start", args=[self.token, self.day.pk]))
         self.assertEqual(response.status_code, 403)
+
+
+class OpsTests(TestCase):
+    def test_healthz_ignores_allowed_hosts(self):
+        response = self.client.get("/healthz/", HTTP_HOST="10.0.0.7:8000")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"ok")
+
+    def test_unknown_host_is_still_rejected_elsewhere(self):
+        self.assertEqual(self.client.get("/login/", HTTP_HOST="evil.example").status_code, 400)
+
+
+class DemoModeTests(TestCase):
+    def test_seed_is_idempotent_with_if_empty(self):
+        from django.core.management import call_command
+
+        call_command("seed_demo", verbosity=0)
+        call_command("seed_demo", "--if-empty", verbosity=0)
+        self.assertEqual(Client.objects.filter(trainer__username="demo").count(), 5)
+
+    def test_login_shows_demo_shortcuts_only_in_demo_mode(self):
+        from django.core.management import call_command
+
+        call_command("seed_demo", verbosity=0)
+        self.assertNotContains(self.client.get(reverse("login")), "kondis-demo-2026")
+        with self.settings(KONDIS_DEMO=True):
+            response = self.client.get(reverse("login"))
+            self.assertContains(response, "kondis-demo-2026")
+            self.assertContains(response, response.context["demo_portal"])
+            self.client.post(reverse("login"), {"username": "demo", "password": "kondis-demo-2026"})
+            self.assertContains(self.client.get(reverse("coaching:dashboard")), "demo-note")

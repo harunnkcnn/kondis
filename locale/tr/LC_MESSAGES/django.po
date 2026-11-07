@@ -28,6 +28,9 @@ msgstr "Egzersizler"
 msgid "Sign out"
 msgstr "Çıkış yap"
 
+msgid "This is a public demo. Data resets regularly, so don't enter real information."
+msgstr "Bu herkese açık bir demo. Veriler düzenli olarak sıfırlanır, gerçek bilgi girme."
+
 msgid "Sign in"
 msgstr "Giriş yap"
 
@@ -42,6 +45,21 @@ msgstr "Kullanıcı adı"
 
 msgid "Password"
 msgstr "Şifre"
+
+msgid "Try the demo"
+msgstr "Demoyu dene"
+
+msgid "Five sample clients with three weeks of training. Data resets regularly."
+msgstr "Üç haftalık antrenman geçmişi olan beş örnek öğrenci. Veriler düzenli olarak sıfırlanır."
+
+msgid "Try as a coach"
+msgstr "Antrenör olarak dene"
+
+msgid "Try as a client"
+msgstr "Öğrenci olarak dene"
+
+msgid "Coach login"
+msgstr "Antrenör girişi"
 
 msgid "Done"
 msgstr "Tamam"

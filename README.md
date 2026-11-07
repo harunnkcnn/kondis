@@ -22,6 +22,16 @@
 
 ![Kondis: antrenör paneli ve öğrencinin telefondaki antrenman ekranı](docs/social-preview.png)
 
+## Demo
+
+**Videoyu izle:** [docs/kondis-demo.mp4](docs/kondis-demo.mp4) (1,5 dk). Antrenör öğrenci ekleyip program yazıyor, öğrenci telefondan setlerini giriyor, antrenör sonucu panelde görüyor.
+
+**Kendin dene:** aşağıdaki butonla Render'ın ücretsiz planında örnek verili kendi demonu birkaç dakikada açabilirsin. Giriş ekranında "Antrenör olarak dene" ve "Öğrenci olarak dene" butonları çıkar.
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/harunnkcnn/kondis)
+
+Demo, ücretsiz planın geçici diski sayesinde her yeniden başlatmada temiz örnek veriyle açılır. Bir süre kullanılmayınca uykuya geçer; ilk açılış bir dakikayı bulabilir.
+
 ## Neden Kondis?
 
 Türkiye'de PT'lerin çoğu öğrenci programını hâlâ WhatsApp'tan fotoğraf, Excel ve not defteriyle yürütüyor. Paket ne zaman bitiyor, öğrenci bu hafta geldi mi, geçen hafta squat'ta kaç kaldırdı... hepsi akılda tutulmaya çalışılıyor.
@@ -43,12 +53,16 @@ Kondis bunu tek bir panelde topluyor:
 - Türkçe ve İngilizce isimli 55 egzersizlik kütüphane + kendi egzersizlerin
 - Paketler: tarih aralığı, seans sayısı (ya da sınırsız), ücret; "Seans düş" ile tek tıkla seans kullanımı
 
+<img src="docs/client-flow.gif" width="260" align="right" alt="Öğrencinin telefondan antrenman girişi">
+
 **Öğrenci tarafı (telefon)**
 - Bugünün antrenmanını kendisi önerir (haftanın gününe ya da son yapılan güne göre)
 - Her egzersizde hedef, dinlenme süresi, antrenörün ipucu ve **geçen seferki setler**
 - Ağırlık ve tekrar alanları son değerlerle dolu gelir; setler sayfa yenilenmeden eklenir
 - Set numarası, yüke göre renklenen bir plaka diski olarak görünür (100+ kırmızı, 60+ mavi, 40+ sarı, 20+ yeşil)
 - Antrenman sonunda kilo ve antrenöre not; yeni rekorlar özet ekranında
+
+<br clear="right">
 
 | Antrenman | Program | Öğrenci kartı |
 |---|---|---|

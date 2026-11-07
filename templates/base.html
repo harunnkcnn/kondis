@@ -32,6 +32,7 @@
   </div>
 </header>
 <main>
+  {% if KONDIS_DEMO %}<p class="demo-note" role="note">{% translate "This is a public demo. Data resets regularly, so don't enter real information." %}</p>{% endif %}
   {% if messages %}<ul class="messages" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>{% endif %}
   {% block content %}{% endblock %}
 </main>

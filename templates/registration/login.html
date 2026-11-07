@@ -12,4 +12,19 @@
     <button class="btn btn-primary" type="submit">{% translate "Sign in" %}</button>
   </form>
 </section>
+{% if KONDIS_DEMO %}
+<section class="panel demo-box" style="max-width:420px;margin:var(--gap) auto 0" aria-labelledby="h-demo">
+  <h2 id="h-demo">{% translate "Try the demo" %}</h2>
+  <p class="muted small">{% translate "Five sample clients with three weeks of training. Data resets regularly." %}</p>
+  <div class="btn-row">
+    <form method="post" class="inline">{% csrf_token %}
+      <input type="hidden" name="username" value="demo"><input type="hidden" name="password" value="kondis-demo-2026">
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="btn btn-primary" type="submit">{% translate "Try as a coach" %}</button>
+    </form>
+    {% if demo_portal %}<a class="btn" href="{{ demo_portal }}">{% translate "Try as a client" %}</a>{% endif %}
+  </div>
+  <p class="muted small" style="margin-bottom:0">{% translate "Coach login" %}: <code>demo</code> / <code>kondis-demo-2026</code></p>
+</section>
+{% endif %}
 {% endblock %}

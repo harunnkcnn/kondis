@@ -27,12 +27,16 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("--password", default="kondis-demo-2026")
         parser.add_argument("--seed", type=int, default=7)
+        parser.add_argument("--if-empty", action="store_true", help="Do nothing when the demo user already exists.")
 
     @transaction.atomic
     def handle(self, *args, **opts):
         rng = random.Random(opts["seed"])
         User = get_user_model()
         if User.objects.filter(username="demo").exists():
+            if opts["if_empty"]:
+                self.stdout.write("Demo data already present, skipping.")
+                return
             raise CommandError("A 'demo' user already exists.")
         coach = User.objects.create_user("demo", password=opts["password"], first_name="Harun", last_name="Koç")
         today = timezone.localdate()

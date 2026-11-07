@@ -46,6 +46,7 @@ if env_bool("KONDIS_PRO", False):
     INSTALLED_APPS.append("kondis_pro")
 
 MIDDLEWARE = [
+    "coaching.middleware.HealthCheckMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -116,6 +117,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "coaching:dashboard"
 LOGOUT_REDIRECT_URL = "login"
+
+# Public demo mode: seeds sample data, shows the demo login and a reset notice.
+KONDIS_DEMO = env_bool("KONDIS_DEMO", False)
 
 # Public base URL used when building client portal links (e.g. https://pt.example.com).
 KONDIS_BASE_URL = os.environ.get("KONDIS_BASE_URL", "").rstrip("/")

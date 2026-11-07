@@ -229,3 +229,8 @@ input[type="checkbox"] { width: 1.2rem; min-height: 1.2rem; height: 1.2rem; acce
 
 .panel, .day, .exercise { border: 1px solid var(--line); }
 input::placeholder, textarea::placeholder { color: var(--muted); opacity: .8; }
+
+.demo-note { margin: 0 0 1.25rem; padding: 0.6rem 0.9rem; border-radius: var(--radius-s); border: 1px dashed var(--blue); color: var(--blue-soft); font-size: 0.875rem; }
+code { font-size: 0.9em; background: var(--sunk); padding: 0.1rem 0.35rem; border-radius: 4px; }
+.pr .grow { flex: 1; min-width: 0; }
+.pr .sub { display: block; }

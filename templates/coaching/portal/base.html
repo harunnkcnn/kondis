@@ -20,6 +20,7 @@
     <a class="brand" href="{% url 'portal:home' client.access_token %}">{% include '_logo.html' %}Kondis</a>
     {% with lang_id="portal" %}{% include '_language.html' %}{% endwith %}
   </header>
+  {% if KONDIS_DEMO %}<p class="demo-note" role="note">{% translate "This is a public demo. Data resets regularly, so don't enter real information." %}</p>{% endif %}
   {% block content %}{% endblock %}
 </div>
 </body>

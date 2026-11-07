@@ -22,6 +22,16 @@
 
 ![Kondis: the coach panel and the client's workout screen on a phone](docs/social-preview.png)
 
+## Demo
+
+**Watch:** [docs/kondis-demo.mp4](docs/kondis-demo.mp4) (90 s). A coach adds a client and writes a program, the client logs sets on a phone, the coach sees it on the dashboard.
+
+**Try it:** the button below starts your own demo on Render's free plan with sample data. The login page offers "Try as a coach" and "Try as a client".
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/harunnkcnn/kondis)
+
+The free plan's temporary disk means every restart brings back clean sample data. It sleeps when idle, so the first load can take up to a minute.
+
 ## Why
 
 Most personal trainers still run their clients on WhatsApp photos, spreadsheets and memory: when does this package end, did she train this week, what did he squat last Monday? Self-hosted trackers like [openGym](https://github.com/DuarteSantos8/openGym) and [wger](https://github.com/wger-project/wger) are great for the lifter. Kondis is built for the person writing the program.
@@ -41,12 +51,16 @@ Most personal trainers still run their clients on WhatsApp photos, spreadsheets 
 - A 55-exercise library named in Turkish and English, plus your own
 - Packages with dates, session count (or unlimited) and price; count a session with one tap
 
+<img src="docs/client-flow.gif" width="260" align="right" alt="A client logging a workout on a phone">
+
 **Client (phone)**
 - Suggests today's workout (by weekday, or the day after the last one done)
 - Target, rest time, coaching cue and **last time's sets** on every exercise
 - Weight and reps prefilled from the last set; sets are added without a page reload
 - The set number sits on a disc coloured like a bumper plate by load (100+ red, 60+ blue, 40+ yellow, 20+ green)
 - Body weight and a note for the coach at the end; new personal bests on the summary
+
+<br clear="right">
 
 | Workout | Program | Client |
 |---|---|---|
