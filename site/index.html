@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kondis | Kişisel antrenörler için panel</title>
+  <meta name="description" content="Her öğrenciye saniyeler içinde kendine özel program. Öğrenci setlerini telefondan girer, uygulama indirmez. 7 gün ücretsiz dene.">
+  <meta property="og:title" content="Kondis: kişisel antrenörler için panel">
+  <meta property="og:description" content="Her öğrenciye özel program, uygulamasız set girişi, paket ve seans takibi. 7 gün ücretsiz.">
+  <meta property="og:image" content="https://harunnkcnn.github.io/kondis/assets/social-preview.png">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#03060b">
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --floor: #070b12; --bar: #03060b; --surface: #0f1726; --sunk: #16213a; --ink: #eaf0fa; --muted: #8d9bb4;
+      --line: #1f2c45; --blue: #2f7bff; --blue-deep: #1347b8; --blue-soft: #8fb6ff;
+      --red: #e5484d; --yellow: #f2b90c; --green: #2fb36b; --plate-white: #e9edf3;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--floor); color: var(--ink); font: 400 1.0625rem/1.6 "Archivo", system-ui, sans-serif; }
+    a { color: inherit; text-underline-offset: 3px; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+    img { display: block; max-width: 100%; height: auto; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+    @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+    .top { background: var(--bar); border-bottom: 1px solid var(--line); }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 14px; padding-bottom: 14px; }
+    .brand { display: flex; align-items: center; gap: .55rem; font-weight: 800; font-size: 1.2rem; font-variation-settings: "wdth" 125; text-decoration: none; }
+    .brand img { width: 30px; height: 30px; }
+    .top nav { display: flex; align-items: center; gap: 1.25rem; font-size: .95rem; }
+    .top nav a { text-decoration: none; color: var(--muted); }
+    .top nav a:hover { color: var(--ink); }
+    @media (max-width: 560px) { .top nav .hide-sm { display: none; } }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .7rem 1.35rem; border-radius: 999px;
+      font-weight: 700; text-decoration: none; border: 1.5px solid var(--line); color: var(--ink); }
+    .btn:hover { border-color: var(--blue); }
+    .btn-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+    .top .btn { min-height: 40px; padding: .45rem 1rem; font-size: .9rem; }
+
+    /* Hero: the plates are the one loud element */
+    .hero { padding: 72px 0 56px; display: grid; gap: 48px; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding-top: 48px; } }
+    .hero h1 { margin: 0; font-size: clamp(2.5rem, 6.4vw, 4.6rem); line-height: 1; font-weight: 800; font-variation-settings: "wdth" 125; letter-spacing: -0.02em; }
+    .hero .lede { margin: 1.25rem 0 0; font-size: 1.2rem; color: var(--muted); max-width: 48ch; }
+    .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+    .fine { margin: .9rem 0 0; color: var(--muted); font-size: .9rem; }
+
+    .rack { display: grid; gap: 14px; }
+    .set { display: flex; align-items: center; gap: 16px; padding: 12px 18px 12px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; }
+    .set .load { font-size: 1.6rem; font-weight: 800; font-variation-settings: "wdth" 125; font-variant-numeric: tabular-nums; }
+    .set .load small { font-size: .9rem; color: var(--muted); font-weight: 500; font-variation-settings: "wdth" 100; }
+    .set .who { margin-left: auto; color: var(--muted); font-size: .9rem; text-align: right; }
+    .plate { flex: none; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 1.15rem;
+      font-variation-settings: "wdth" 125; color: #fff; background: var(--p);
+      box-shadow: inset 0 0 0 5px rgba(0,0,0,.2), inset 0 0 0 12px var(--p), inset 0 0 0 13px rgba(255,255,255,.35); }
+    .p-red { --p: var(--red); } .p-blue { --p: var(--blue); } .p-yellow { --p: var(--yellow); color: #17212b; } .p-green { --p: var(--green); }
+    @media (prefers-reduced-motion: no-preference) {
+      .set { animation: drop .5s cubic-bezier(.2,.8,.2,1) both; }
+      .set:nth-child(2) { animation-delay: .12s; } .set:nth-child(3) { animation-delay: .24s; } .set:nth-child(4) { animation-delay: .36s; }
+      @keyframes drop { from { opacity: 0; transform: translateY(-14px); } }
+    }
+
+    section { padding: 80px 0; border-top: 1px solid var(--line); }
+    h2 { margin: 0 0 .5rem; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.1; font-weight: 800; font-variation-settings: "wdth" 118; }
+    .intro { margin: 0 0 2.5rem; color: var(--muted); max-width: 60ch; }
+
+    .split { display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+    .split.flip > :first-child { order: 2; }
+    @media (max-width: 900px) { .split { grid-template-columns: 1fr; } .split.flip > :first-child { order: 0; } }
+    .shot { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+    .phone { max-width: 300px; margin: 0 auto; border: 10px solid #1b2433; border-radius: 34px; overflow: hidden; }
+    .points { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+    .points li { padding: .85rem 0; border-top: 1px solid var(--line); }
+    .points b { display: block; }
+    .points span { color: var(--muted); font-size: .98rem; }
+
+    .price { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 760px; }
+    .tier { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; }
+    .tier.best { border-color: var(--blue); }
+    .tier h3 { margin: 0; font-size: 1.1rem; }
+    .tier .amount { margin: .6rem 0 .25rem; font-size: 2.2rem; font-weight: 800; font-variation-settings: "wdth" 125; color: var(--blue-soft); }
+    .tier p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    .self { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; justify-content: space-between; padding: 1.5rem; border: 1px dashed var(--line); border-radius: 16px; }
+    .self p { margin: 0; color: var(--muted); max-width: 60ch; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; background: var(--sunk); padding: .1rem .35rem; border-radius: 4px; }
+
+    footer { padding: 32px 0 48px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; justify-content: space-between; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="./"><img src="assets/logo.svg" alt="">Kondis</a>
+      <nav aria-label="Sayfa">
+        <a class="hide-sm" href="#nasil">Nasıl çalışır</a>
+        <a class="hide-sm" href="#fiyat">Fiyat</a>
+        <a class="hide-sm" href="https://github.com/harunnkcnn/kondis">GitHub</a>
+        <!-- Replace with the cloud sign-up URL once it is live, e.g. https://app.kondis.com.tr/signup/ -->
+        <a class="btn btn-primary js-signup" href="https://github.com/harunnkcnn/kondis#demo">Ücretsiz dene</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <h1>Her öğrenciye kendi programı.</h1>
+        <p class="lede">Kişisel antrenörler ve butik salonlar için panel. Programı saniyeler içinde oluşturursun, öğrencin uygulama indirmeden telefondan setlerini girer, sen paketi ve gelişimi tek ekrandan izlersin.</p>
+        <div class="cta">
+          <a class="btn btn-primary js-signup" href="https://github.com/harunnkcnn/kondis#demo">7 gün ücretsiz dene</a>
+          <a class="btn" href="https://github.com/harunnkcnn/kondis/raw/main/docs/kondis-demo.mp4">Videoyu izle</a>
+        </div>
+        <p class="fine">Kart gerekmez. Deneme bitince verilerin silinmez.</p>
+      </div>
+      <div class="rack" aria-label="Bugün girilen setlerden örnekler">
+        <div class="set"><span class="plate p-red">1</span><span class="load">102,5 <small>kg × 3</small></span><span class="who">Mert<br>Squat</span></div>
+        <div class="set"><span class="plate p-blue">2</span><span class="load">70 <small>kg × 6</small></span><span class="who">Zeynep<br>Hip thrust</span></div>
+        <div class="set"><span class="plate p-yellow">3</span><span class="load">42,5 <small>kg × 8</small></span><span class="who">Elif<br>Göğüs destekli row</span></div>
+        <div class="set"><span class="plate p-green">4</span><span class="load">24 <small>kg × 10</small></span><span class="who">Selin<br>Goblet squat</span></div>
+      </div>
+    </div>
+
+    <section id="nasil">
+      <div class="wrap split">
+        <div>
+          <h2>Program yazmak artık beş dakika sürmüyor</h2>
+          <p class="intro">Hedefi, seviyeyi, haftada kaç gün geleceğini, ekipmanı ve korunması gereken bölgeyi seç. Kondis programı yazar; istediğin hareketi değiştirirsin.</p>
+          <ul class="points">
+            <li><b>İki öğrenciye aynı plan çıkmaz.</b><span>Aynı profilde bile hareket seçimi kişiye özel. Beğenmezsen tek tıkla farklı versiyon.</span></li>
+            <li><b>Sakatlığı unutmaz.</b><span>Dizi, omzu ya da beli korunan öğrenciye o eklemi yükleyen hareket hiç gelmez.</span></li>
+            <li><b>Salon, dumbbell ya da ev.</b><span>Ekipmana göre hareket seçer; set, tekrar ve dinlenme hedefe göre ayarlanır.</span></li>
+          </ul>
+        </div>
+        <div class="shot"><img src="assets/program.png" width="1280" height="2195" alt="Otomatik oluşturulmuş, dört günlük güç programı" loading="lazy"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split flip">
+        <div>
+          <h2>Öğrencin uygulama indirmez</h2>
+          <p class="intro">Ona özel linki WhatsApp'tan gönderirsin. Açar, bugünün antrenmanını görür, geçen seferki setlerine bakarak yenisini girer.</p>
+          <ul class="points">
+            <li><b>Geçen seferki setler gözünün önünde.</b><span>Ağırlık ve tekrar son değerle dolu gelir; tek dokunuşla kaydedilir.</span></li>
+            <li><b>Rekorlar kendiliğinden çıkar.</b><span>Antrenman bitince yeni kişisel rekorları ve toplam hacmi görür.</span></li>
+            <li><b>Sen anında görürsün.</b><span>Kim çalıştı, kimin paketi bitiyor, kim bir haftadır yok: hepsi ana ekranda.</span></li>
+          </ul>
+        </div>
+        <div class="phone"><img src="assets/client-flow.gif" width="300" height="650" alt="Öğrencinin telefondan set girişi" loading="lazy"></div>
+      </div>
+    </section>
+
+    <section id="fiyat">
+      <div class="wrap">
+        <h2>Tek fiyat, sınırsız öğrenci</h2>
+        <p class="intro">Öğrenci başına ücret yok. 7 gün boyunca her şeyi ücretsiz kullan, sonra devam etmek istersen abone ol.</p>
+        <div class="price">
+          <div class="tier"><h3>Aylık</h3><div class="amount">Yakında</div><p>İstediğin ay bırak.</p></div>
+          <div class="tier best"><h3>Yıllık</h3><div class="amount">Yakında</div><p>İki ay bizden.</p></div>
+        </div>
+        <div class="self" style="margin-top:2rem">
+          <p>Kendi sunucunda çalıştırmak mı istiyorsun? Kondis açık kaynak (AGPL-3.0). Docker ile kurup sınırsız kullanabilirsin.</p>
+          <a class="btn" href="https://github.com/harunnkcnn/kondis">Kaynak kodu</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Kondis, açık kaynak. Django + htmx ile yapıldı.</span>
+      <span>Geliştiren <a href="https://github.com/harunnkcnn">Harun Kaçan</a></span>
+    </div>
+  </footer>
+</body>
+</html>

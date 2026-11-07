@@ -9,6 +9,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 
+from billing.middleware import portal_paused_response
+from billing.models import has_access as trainer_has_access
+
 from . import services
 from .forms import FinishWorkoutForm, SetEntryForm
 from .models import Client, Exercise, ProgramDay, SetEntry, Workout
@@ -20,7 +23,10 @@ def portal_view(view):
     @wraps(view)
     def wrapper(request: HttpRequest, token: str, *args, **kwargs) -> HttpResponse:
         client = get_object_or_404(Client.objects.select_related("trainer"), access_token=token, is_active=True)
-        response = view(request, client, *args, **kwargs)
+        if not trainer_has_access(client.trainer):
+            response = portal_paused_response(request, client)
+        else:
+            response = view(request, client, *args, **kwargs)
         response["X-Robots-Tag"] = "noindex, nofollow"
         response["Referrer-Policy"] = "same-origin"
         response["Cache-Control"] = "private, no-store"

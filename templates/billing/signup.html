@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Create your account" %}{% endblock %}
+{% block content %}
+<div class="signup">
+  <div class="signup-pitch">
+    <h1>{% blocktranslate count n=trial_days %}Try Kondis free for {{ n }} day{% plural %}Try Kondis free for {{ n }} days{% endblocktranslate %}</h1>
+    <p>{% translate "Add your clients, generate a program for each of them and send their workout link. No card needed to start." %}</p>
+    <ul class="ticks">
+      <li>{% translate "A personal program for every client, in seconds" %}</li>
+      <li>{% translate "Clients log sets from their phone, no app to install" %}</li>
+      <li>{% translate "Packages, sessions and who has gone quiet on one screen" %}</li>
+    </ul>
+  </div>
+  <section class="panel">
+    <form method="post" class="form" novalidate>{% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+      <div class="field{% if field.widget_type == 'checkbox' %} field-check{% endif %}">
+        {% if field.widget_type == 'checkbox' %}{{ field }}{{ field.label_tag }}{% else %}{{ field.label_tag }}{{ field }}{% endif %}
+        {% if field.help_text %}<div class="help">{{ field.help_text }}</div>{% endif %}
+        {{ field.errors }}
+      </div>
+      {% endfor %}
+      <button class="btn btn-primary" type="submit">{% translate "Start free trial" %}</button>
+      <p class="muted small" style="margin:0">{% translate "Already have an account?" %} <a href="{% url 'login' %}">{% translate "Sign in" %}</a></p>
+    </form>
+  </section>
+</div>
+{% endblock %}

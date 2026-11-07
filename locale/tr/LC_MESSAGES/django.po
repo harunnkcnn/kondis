@@ -25,8 +25,14 @@ msgstr "Öğrenciler"
 msgid "Exercises"
 msgstr "Egzersizler"
 
+msgid "Subscription"
+msgstr "Abonelik"
+
 msgid "Sign out"
 msgstr "Çıkış yap"
+
+msgid "Subscribe"
+msgstr "Abone ol"
 
 msgid "This is a public demo. Data resets regularly, so don't enter real information."
 msgstr "Bu herkese açık bir demo. Veriler düzenli olarak sıfırlanır, gerçek bilgi girme."
@@ -40,11 +46,17 @@ msgstr "Antrenör paneli. Öğrencilerin senin gönderdiğin linki kullanır."
 msgid "Username or password is wrong."
 msgstr "Kullanıcı adı ya da şifre hatalı."
 
+msgid "Email"
+msgstr "E-posta"
+
 msgid "Username"
 msgstr "Kullanıcı adı"
 
 msgid "Password"
 msgstr "Şifre"
+
+msgid "New here?"
+msgstr "Yeni misin?"
 
 msgid "Try the demo"
 msgstr "Demoyu dene"
@@ -211,9 +223,6 @@ msgstr "Bilgiler"
 msgid "Phone"
 msgstr "Telefon"
 
-msgid "Email"
-msgstr "E-posta"
-
 msgid "Level"
 msgstr "Seviye"
 
@@ -321,6 +330,69 @@ msgstr "Göster"
 
 msgid "Active"
 msgstr "Aktif"
+
+msgid "Your access has ended. Your clients and programs are kept; subscribe to pick up where you left off."
+msgstr "Erişimin sona erdi. Öğrencilerin ve programların duruyor; abone olunca kaldığın yerden devam edersin."
+
+msgid "Monthly"
+msgstr "Aylık"
+
+msgid "month"
+msgstr "ay"
+
+msgid "Pay monthly"
+msgstr "Aylık öde"
+
+msgid "Yearly"
+msgstr "Yıllık"
+
+msgid "year"
+msgstr "yıl"
+
+msgid "Pay yearly"
+msgstr "Yıllık öde"
+
+msgid "Everything is included"
+msgstr "Her şey dahil"
+
+msgid "Unlimited clients, generated programs, workout links, packages and sessions, records and history. One price, no per-client fee."
+msgstr "Sınırsız öğrenci, otomatik program, antrenman linkleri, paket ve seans takibi, rekorlar ve geçmiş. Tek fiyat, öğrenci başına ücret yok."
+
+msgid "After you pay, your access is extended within the same working day. Use the email you signed up with in the payment note."
+msgstr "Ödemeden sonra erişimin aynı iş günü içinde uzatılır. Ödeme notuna kayıt olduğun e-postayı yaz."
+
+msgid "Questions? Write on WhatsApp"
+msgstr "Sorun mu var? WhatsApp'tan yaz"
+
+msgid "Active until %(d)s."
+msgstr "%(d)s tarihine kadar aktif."
+
+msgid "Create your account"
+msgstr "Hesap oluştur"
+
+msgid "Add your clients, generate a program for each of them and send their workout link. No card needed to start."
+msgstr "Öğrencilerini ekle, her birine özel programı oluştur ve antrenman linkini gönder. Başlamak için kart gerekmez."
+
+msgid "A personal program for every client, in seconds"
+msgstr "Her öğrenciye saniyeler içinde kendine özel program"
+
+msgid "Clients log sets from their phone, no app to install"
+msgstr "Öğrenciler setlerini telefondan girer, uygulama indirmez"
+
+msgid "Packages, sessions and who has gone quiet on one screen"
+msgstr "Paketler, seanslar ve kaybolan öğrenciler tek ekranda"
+
+msgid "Start free trial"
+msgstr "Ücretsiz denemeyi başlat"
+
+msgid "Already have an account?"
+msgstr "Zaten hesabın var mı?"
+
+msgid "Your program is paused"
+msgstr "Programın şu an durduruldu"
+
+msgid "Your coach's account isn't active right now. Your workouts are saved; this link will work again as soon as it's renewed."
+msgstr "Antrenörünün hesabı şu an aktif değil. Antrenmanların kayıtlı; hesap yenilendiğinde bu link yeniden çalışır."
 
 msgid "No package"
 msgstr "Paket yok"
@@ -817,6 +889,67 @@ msgstr "Türkçe"
 msgid "English"
 msgstr "İngilizce"
 
+msgid "Payment received: add 1 month"
+msgstr "Ödeme alındı: 1 ay ekle"
+
+msgid "Extended by 30 days."
+msgstr "30 gün uzatıldı."
+
+msgid "Payment received: add 1 year"
+msgstr "Ödeme alındı: 1 yıl ekle"
+
+msgid "Extended by 365 days."
+msgstr "365 gün uzatıldı."
+
+msgid "Cancel access"
+msgstr "Erişimi iptal et"
+
+msgid "Free trial"
+msgstr "Ücretsiz deneme"
+
+msgid "Canceled"
+msgstr "İptal edildi"
+
+msgid "status"
+msgstr "durum"
+
+msgid "gym or studio"
+msgstr "salon ya da stüdyo"
+
+msgid "access until"
+msgstr "erişim bitişi"
+
+msgid "Payment reference, invoice number..."
+msgstr "Ödeme referansı, fatura no..."
+
+msgid "Your name"
+msgstr "Adın soyadın"
+
+msgid "Gym or studio"
+msgstr "Salon ya da stüdyo"
+
+msgid "We use it only for your subscription."
+msgstr "Sadece aboneliğin için kullanırız."
+
+msgid "At least 10 characters."
+msgstr "En az 10 karakter."
+
+msgid "I accept the terms of use and privacy notice."
+msgstr "Kullanım koşullarını ve aydınlatma metnini kabul ediyorum."
+
+msgid "An account with this email already exists. Sign in instead."
+msgstr "Bu e-postayla bir hesap zaten var. Giriş yap."
+
+msgid "Free trial: %(n)s day left."
+msgid_plural "Free trial: %(n)s days left."
+msgstr[0] "Ücretsiz deneme: %(n)s gün kaldı."
+msgstr[1] "Ücretsiz deneme: %(n)s gün kaldı."
+
+msgid "Try free for %(n)s day"
+msgid_plural "Try free for %(n)s days"
+msgstr[0] "%(n)s gün ücretsiz dene"
+msgstr[1] "%(n)s gün ücretsiz dene"
+
 msgid "%(n)s set"
 msgid_plural "%(n)s sets"
 msgstr[0] "%(n)s set"
@@ -831,6 +964,16 @@ msgid "%(n)s exercise, in Turkish and English."
 msgid_plural "%(n)s exercises, in Turkish and English."
 msgstr[0] "%(n)s egzersiz, Türkçe ve İngilizce."
 msgstr[1] "%(n)s egzersiz, Türkçe ve İngilizce."
+
+msgid "Your free trial ends in %(n)s day."
+msgid_plural "Your free trial ends in %(n)s days."
+msgstr[0] "Ücretsiz denemen %(n)s gün sonra bitiyor."
+msgstr[1] "Ücretsiz denemen %(n)s gün sonra bitiyor."
+
+msgid "Try Kondis free for %(n)s day"
+msgid_plural "Try Kondis free for %(n)s days"
+msgstr[0] "Kondis'i %(n)s gün ücretsiz dene"
+msgstr[1] "Kondis'i %(n)s gün ücretsiz dene"
 
 msgid "%(n)s workout"
 msgid_plural "%(n)s workouts"

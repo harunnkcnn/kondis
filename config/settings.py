@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "coaching",
+    "billing",
 ]
 
 # Kondis Pro ships as a separate, licensed package. When it is installed,
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "billing.middleware.PaywallMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -71,6 +73,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "coaching.context_processors.kondis",
+                "billing.context_processors.billing",
             ],
         },
     },
@@ -124,6 +127,18 @@ LOGOUT_REDIRECT_URL = "login"
 
 # Public demo mode: seeds sample data, shows the demo login and a reset notice.
 KONDIS_DEMO = env_bool("KONDIS_DEMO", False)
+
+# Hosted (cloud) mode: public sign-up, a free trial and a paywall after it.
+# Self-hosted installs leave this off and have no limits.
+KONDIS_HOSTED = env_bool("KONDIS_HOSTED", False)
+KONDIS_TRIAL_DAYS = int(os.environ.get("KONDIS_TRIAL_DAYS", "7"))
+KONDIS_PRICE_MONTHLY = os.environ.get("KONDIS_PRICE_MONTHLY", "")
+KONDIS_PRICE_YEARLY = os.environ.get("KONDIS_PRICE_YEARLY", "")
+# Payment links from your provider (iyzico, PayTR, Shopier...). After a payment,
+# extend the coach's access from the admin with "Payment received".
+KONDIS_PAY_MONTHLY_URL = os.environ.get("KONDIS_PAY_MONTHLY_URL", "")
+KONDIS_PAY_YEARLY_URL = os.environ.get("KONDIS_PAY_YEARLY_URL", "")
+KONDIS_SUPPORT_WHATSAPP = os.environ.get("KONDIS_SUPPORT_WHATSAPP", "")
 
 # Public base URL used when building client portal links (e.g. https://pt.example.com).
 KONDIS_BASE_URL = os.environ.get("KONDIS_BASE_URL", "").rstrip("/")

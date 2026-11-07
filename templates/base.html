@@ -22,6 +22,7 @@
     <a href="{% url 'coaching:dashboard' %}" {% if nav == 'today' %}aria-current="page"{% endif %}>{% translate "Today" %}</a>
     <a href="{% url 'coaching:client_list' %}" {% if nav == 'clients' %}aria-current="page"{% endif %}>{% translate "Clients" %}</a>
     <a href="{% url 'coaching:exercise_list' %}" {% if nav == 'library' %}aria-current="page"{% endif %}>{% translate "Exercises" %}</a>
+    {% if KONDIS_HOSTED %}<a href="{% url 'billing:subscription' %}" {% if nav == 'subscription' %}aria-current="page"{% endif %}>{% translate "Subscription" %}</a>{% endif %}
   </nav>
   {% endif %}
   <div class="end">
@@ -32,11 +33,12 @@
   </div>
 </header>
 <main>
+  {% if subscription and subscription.is_trial and subscription.has_access and nav != 'subscription' %}<p class="trial-note" role="note">{% blocktranslate count n=subscription.days_left %}Free trial: {{ n }} day left.{% plural %}Free trial: {{ n }} days left.{% endblocktranslate %} <a href="{% url 'billing:subscription' %}">{% translate "Subscribe" %}</a></p>{% endif %}
   {% if KONDIS_DEMO %}<p class="demo-note" role="note">{% translate "This is a public demo. Data resets regularly, so don't enter real information." %}</p>{% endif %}
   {% if messages %}<ul class="messages" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>{% endif %}
   {% block content %}{% endblock %}
 </main>
-<footer class="foot">Kondis {% if KONDIS_EDITION == 'pro' %}Pro{% else %}Community{% endif %} · AGPL-3.0</footer>
+<footer class="foot">Kondis {% if KONDIS_HOSTED %}Cloud{% elif KONDIS_EDITION == "pro" %}Pro{% else %}Community{% endif %} · AGPL-3.0</footer>
 {% endblock %}
 </body>
 </html>

@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/badge/dil-TR%20%7C%20EN-0f1726" alt="TR | EN">
 </p>
 
-<p align="center"><b>Türkçe</b> · <a href="README.en.md">English</a></p>
+<p align="center"><a href="https://harunnkcnn.github.io/kondis/"><b>Tanıtım sayfası</b></a> · <b>Türkçe</b> · <a href="README.en.md">English</a></p>
 
 ---
 
@@ -140,6 +140,22 @@ locale/tr/       Türkçe çeviriler
 - Tüm formlarda CSRF koruması açık, yayında güvenli çerezler varsayılan.
 
 Bir açık bulursan lütfen herkese açık issue yerine [SECURITY.md](SECURITY.md)'deki adrese yaz.
+
+## Kondis Cloud (barındırılan sürüm)
+
+`KONDIS_HOSTED=1` ile Kondis bulut hizmeti olarak çalışır: antrenörler `/signup/` sayfasından kendi kaydolur, **7 gün ücretsiz** kullanır, sonra abonelik gerekir. Deneme bitince veriler silinmez; antrenör abonelik sayfasına yönlenir, öğrenci linkleri "program durduruldu" mesajı gösterir.
+
+| Değişken | Ne işe yarar |
+|---|---|
+| `KONDIS_HOSTED` | `1` = kayıt, deneme ve ödeme duvarı açık |
+| `KONDIS_TRIAL_DAYS` | Deneme süresi (varsayılan `7`) |
+| `KONDIS_PRICE_MONTHLY`, `KONDIS_PRICE_YEARLY` | Abonelik sayfasında gösterilen fiyat (₺) |
+| `KONDIS_PAY_MONTHLY_URL`, `KONDIS_PAY_YEARLY_URL` | Ödeme sağlayıcının ödeme linki (iyzico, PayTR, Shopier...) |
+| `KONDIS_SUPPORT_WHATSAPP` | Destek için WhatsApp numarası (`905xxxxxxxxx`) |
+
+Ödeme gelince yönetim panelinde (`/admin/` → Subscriptions) antrenörü seçip **"Ödeme alındı: 1 ay ekle"** ya da **"1 yıl ekle"** demek yeterli. Kalıcı veri için bulut sürümünü PostgreSQL ya da kalıcı diskli bir sunucuda çalıştır; Render'ın ücretsiz planı sadece demo içindir.
+
+Kendi sunucusuna kuranlar için bu mod kapalıdır; açık sürümde süre ya da öğrenci sınırı yoktur.
 
 ## Sürümler
 

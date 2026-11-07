@@ -6,10 +6,11 @@
   <p class="muted" style="margin-top:0">{% translate "Coach panel. Clients use the link you send them." %}</p>
   <form method="post" class="form">{% csrf_token %}
     {% if form.errors %}<p class="field errorlist" role="alert" style="color:var(--red);margin:0">{% translate "Username or password is wrong." %}</p>{% endif %}
-    <div class="field"><label for="id_username">{% translate "Username" %}</label>{{ form.username }}</div>
+    <div class="field"><label for="id_username">{% if KONDIS_HOSTED %}{% translate "Email" %}{% else %}{% translate "Username" %}{% endif %}</label>{{ form.username }}</div>
     <div class="field"><label for="id_password">{% translate "Password" %}</label>{{ form.password }}</div>
     <input type="hidden" name="next" value="{{ next }}">
     <button class="btn btn-primary" type="submit">{% translate "Sign in" %}</button>
+    {% if KONDIS_HOSTED %}<p class="muted small" style="margin:0">{% translate "New here?" %} <a href="{% url 'billing:signup' %}">{% blocktranslate count n=KONDIS_TRIAL_DAYS %}Try free for {{ n }} day{% plural %}Try free for {{ n }} days{% endblocktranslate %}</a></p>{% endif %}
   </form>
 </section>
 {% if KONDIS_DEMO %}

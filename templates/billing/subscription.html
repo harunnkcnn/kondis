@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Subscription" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% translate "Subscription" %}</h1>
+    {% if sub %}
+      {% if sub.has_access %}
+        <p>{% if sub.is_trial %}{% blocktranslate count n=sub.days_left %}Your free trial ends in {{ n }} day.{% plural %}Your free trial ends in {{ n }} days.{% endblocktranslate %}{% else %}{% blocktranslate with d=sub.paid_until|date:"j F Y" %}Active until {{ d }}.{% endblocktranslate %}{% endif %}</p>
+      {% else %}
+        <p>{% translate "Your access has ended. Your clients and programs are kept; subscribe to pick up where you left off." %}</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+<div class="plans">
+  <section class="panel plan">
+    <h2>{% translate "Monthly" %}</h2>
+    <p class="price num">{{ price_monthly|default:"–" }}{% if price_monthly %} <small>₺ / {% translate "month" %}</small>{% endif %}</p>
+    {% if pay_monthly_url %}<a class="btn btn-primary" href="{{ pay_monthly_url }}" target="_blank" rel="noopener">{% translate "Pay monthly" %}</a>{% endif %}
+  </section>
+  <section class="panel plan plan-best">
+    <h2>{% translate "Yearly" %}</h2>
+    <p class="price num">{{ price_yearly|default:"–" }}{% if price_yearly %} <small>₺ / {% translate "year" %}</small>{% endif %}</p>
+    {% if pay_yearly_url %}<a class="btn btn-primary" href="{{ pay_yearly_url }}" target="_blank" rel="noopener">{% translate "Pay yearly" %}</a>{% endif %}
+  </section>
+</div>
+
+<section class="panel" style="margin-top:var(--gap)">
+  <h2>{% translate "Everything is included" %}</h2>
+  <p class="muted" style="margin:0">{% translate "Unlimited clients, generated programs, workout links, packages and sessions, records and history. One price, no per-client fee." %}</p>
+  <p class="muted small" style="margin:.75rem 0 0">{% translate "After you pay, your access is extended within the same working day. Use the email you signed up with in the payment note." %}{% if support_whatsapp %} <a href="https://wa.me/{{ support_whatsapp }}" target="_blank" rel="noopener">{% translate "Questions? Write on WhatsApp" %}</a>{% endif %}</p>
+</section>
+{% endblock %}

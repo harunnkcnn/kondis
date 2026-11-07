@@ -19,7 +19,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements-dev.txt
       - name: Lint
-        run: ruff check . && ruff format --check coaching config
+        run: ruff check . && ruff format --check coaching config billing
       - name: Check translations compile
         run: pybabel compile -i locale/tr/LC_MESSAGES/django.po -o /tmp/django.mo -l tr
       - name: Django checks
